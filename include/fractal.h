@@ -13,29 +13,34 @@
 #ifndef FRACTAL_H
 # define FRACTAL_H
 # include <math.h>
+# include <stdint.h>
+# include <stdbool.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 512
-# define HEIGHT 512
+# define WIDTH 1020
+# define HEIGHT 1020
+# define START_SCALE 1
 
-typedef struct s_pixels
+typedef struct s_complex
 {
-	double	origin_r;
-	double	origin_i;
-	double	orbit_r;
-	double	orbit_i;
-	double	nearest_orbit_r;
-	double	nearest_orbit_i;
-}	t_pixels;
+	double	r;
+	double	i;
+}	t_complex;
+
+typedef struct s_points
+{
+	t_complex	origin;
+	t_complex	orbit;
+	t_complex	nearest;
+}	t_points;
 
 typedef struct s_data
 {
-	t_pixels*		new;
-	mlx_image_t*	alive;
-	mlx_image_t*	ghost;
+	t_points*		points;
+	mlx_image_t*	live_frame;
+	mlx_image_t*	ghost_frame;
 	double			scale;
 	int				iteration;
-	double			view_r;
-	double			view_i;
+	t_complex		location;
 	int				work_per_frame;			
 	mlx_t*			mlx;
 }	t_data;

@@ -10,48 +10,73 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "MLX42/MLX42.h"
 #include "fractal.h"
+#include <string.h>
+#include <stdio.h>
 
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+void	increment_pixel(uint8_t *pixel)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	pixel[0]++;
+	// pixel[1]++;
+	// pixel[2]++;
 }
 
-void ft_randomize(void* param)
+void	print_cursor_coordinates(t_data *data)
 {
-	(void)param;
-	for (uint32_t i = 0; i < image->width; ++i)
+	int32_t x;
+	int32_t y;
+
+	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	printf("%i, %i\n", x, y);
+}
+
+void	loop_hook(void *input)
+{
+	t_data	*data = input;
+	(void)data;
+	print_cursor_coordinates(data);
+}
+
+void	set_alpha(uint8_t *pixels)
+{
+	int i = 0;
+
+	while (i < WIDTH * HEIGHT)
 	{
-		for (uint32_t y = 0; y < image->height; ++y)
-		{
-			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
-				rand() % 0xFF, // G
-				rand() % 0xFF, // B
-				rand() % 0xFF  // A
-			);
-			mlx_put_pixel(image, i, y, color);
-		}
+		pixels[i * 4 + 3] = 0xFF;
+		pixels[i * 4 + 0] = i;
+		// pixels[i * 4 + 1] = i;
+		// pixels[i * 4 + 2] = i;
+		i++;
 	}
 }
 
-int32_t main(void)
+t_complex	index_to_point(int index)
+{
+	
+}
+
+void	initialize(t_data *data)
+{
+	data->scale = START_SCALE;
+}
+
+int main(void)
 {
 	t_data	data;
 
-	if (!(data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-		return(1);
-	if (!(data.alive = mlx_new_image(data.mlx, WIDTH, HEIGHT)))
+	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	data.live_frame = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	bzero(data.live_frame->pixels, WIDTH * HEIGHT * sizeof(int32_t));
+	set_alpha(data.live_frame->pixels);
+	// gradient(data.live_frame);
+	if (mlx_image_to_window(data.mlx, data.live_frame, 0, 0) == -1)
 	{
 		mlx_close_window(data.mlx);
 		return(1);
 	}
-	if (mlx_image_to_window(data.mlx, data.alive, 0, 0) == -1)
-	{
-		mlx_close_window(data.mlx);
-		return(1);
-	}
-	mlx_loop_hook(data.mlx, ft_randomize, data.mlx);
+	mlx_loop_hook(data.mlx, &loop_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0);
