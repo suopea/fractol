@@ -52,11 +52,6 @@ void	set_alpha(uint8_t *pixels)
 	}
 }
 
-t_complex	index_to_point(int index)
-{
-	
-}
-
 void	initialize(t_data *data)
 {
 	data->scale = START_SCALE;
