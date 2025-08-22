@@ -42,5 +42,6 @@ void	update_origins(t_data *data);
 void	move_center(t_data *data, int x, int y);
 int		i(int x, int y);
 int		center(void);
+void	zoom_to_point(t_data *data, int x, int y, float change);
 
 #endif

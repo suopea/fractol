@@ -43,6 +43,16 @@ void	test_move(t_data *data, int x, int y)
 	printf("\n\n");
 }
 
+void	test_zoom(t_data *data, int x, int y, float change)
+{
+	printf("scaling %.1f at (%i, %i)\n\n", change, x, y);
+	
+	zoom_to_point(data, x, y, change);
+	print_points(*data);
+
+	printf("\n\n");
+}
+
 int	main(void)
 {
 	t_data	data;
@@ -55,5 +65,12 @@ int	main(void)
 
 	test_move(&data, 1, 1);
 	test_move(&data, 3, 1);
+
+	test(&data, 1, 0, 0);
+
+	test_zoom(&data, 1, 1, 2);
+	test_zoom(&data, 3, 1, 0.5);
+	test_zoom(&data, 3, 1, 1);
+
 }
 
