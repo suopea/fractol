@@ -1,4 +1,7 @@
-.json
-.idx
+*.json
+*.idx
+*.o
+a.out
 .cache
 MLX42
+fractol

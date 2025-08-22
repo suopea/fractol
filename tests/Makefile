@@ -6,12 +6,12 @@ MLX_LIB := $(MLX_DIR)/build/libmlx42.a
 HEADERS	:= -I ../include -I $(MLX_DIR)/include
 LIBS	:= $(MLX_LIB) -ldl -lglfw -pthread -lm
 
+coordinates:
+	cc ../src/coordinates.c ../src/indexes.c test_coordinates.c $(HEADERS) -g
+	./a.out
+
 none:
 	echo "do nothing"
-
-coordinates:
-	cc ../src/coordinates.c test_coordinates.c $(HEADERS) -g
-	./a.out
 
 $(MLX_LIB): $(MLX_DIR)
 	@cmake $(MLX_DIR)/ -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4

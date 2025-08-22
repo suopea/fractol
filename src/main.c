@@ -52,11 +52,6 @@ void	set_alpha(uint8_t *pixels)
 	}
 }
 
-void	initialize(t_data *data)
-{
-	data->scale = START_SCALE;
-}
-
 int main(void)
 {
 	t_data	data;

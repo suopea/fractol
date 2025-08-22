@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 11:42:17 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 14:24:14 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,11 @@ typedef struct s_complex
 	double	i;
 }	t_complex;
 
-typedef struct s_points
-{
-	t_complex	origin;
-	t_complex	orbit;
-	t_complex	nearest;
-}	t_points;
-
 typedef struct s_data
 {
-	t_points*		points;
-	mlx_image_t*	live_frame;
-	mlx_image_t*	ghost_frame;
+	t_complex*		px;
+	t_complex*		orbits;
+	mlx_image_t*	rendered;
 	double			scale;
 	int				iteration;
 	t_complex		location;
@@ -45,6 +38,9 @@ typedef struct s_data
 	mlx_t*			mlx;
 }	t_data;
 
-void	update_locations(t_data *data);
+void	update_origins(t_data *data);
+void	move_center(t_data *data, int x, int y);
+int		i(int x, int y);
+int		center(void);
 
 #endif
