@@ -71,6 +71,7 @@ int	main(void)
 	draw_grid(&data);
 
 	mlx_mouse_hook(data.mlx, &mouse_hook, &data);
+	mlx_scroll_hook(data.mlx, &scroll_hook, &data);
 	mlx_loop_hook(data.mlx, loop_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
