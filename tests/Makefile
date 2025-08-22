@@ -6,6 +6,10 @@ MLX_LIB := $(MLX_DIR)/build/libmlx42.a
 HEADERS	:= -I ../include -I $(MLX_DIR)/include
 LIBS	:= $(MLX_LIB) -ldl -lglfw -pthread -lm
 
+basic: $(MLX_LIB)
+	cc basic.c $(HEADERS) $(LIBS) -g
+	./a.out
+
 move: $(MLX_LIB)
 	cc ../src/coordinates.c ../src/indexes.c ../src/init.c test_move.c $(HEADERS) $(LIBS) -g
 	./a.out

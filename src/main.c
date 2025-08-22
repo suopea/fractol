@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 16:52:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 17:20:00 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 18:22:27 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,11 @@ void	increment_pixel(uint8_t *pixel)
 	// pixel[2]++;
 }
 
-void	print_cursor_coordinates(t_data *data)
-{
-	int32_t x;
-	int32_t y;
-
-	mlx_get_mouse_pos(data->mlx, &x, &y);	
-	printf("%i, %i\n", x, y);
-}
 
 void	loop_hook(void *input)
 {
 	t_data	*data = input;
 	(void)data;
-	print_cursor_coordinates(data);
 }
 
 void	set_alpha(uint8_t *pixels)

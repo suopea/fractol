@@ -1,6 +1,21 @@
 
+#include "MLX42/MLX42.h"
 #include "fractal.h"
 #include <stdio.h>
+#include <string.h>
+
+void	print_cursor_coordinates(t_data *data)
+{
+	int32_t x;
+	int32_t y;
+	char	*string;
+
+	string = malloc(1000);
+	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	sprintf(string, "px: %i, %i | plane: %.1f, %.1f", x, y, data->px[i(x, y)].r, data->px[i(x, y)].i);
+	mlx_set_window_title(data->mlx, string);
+	free(string);
+}
 
 int	near(int n, t_complex px)
 {
@@ -46,6 +61,7 @@ void	loop_hook(void *data)
 	data = (t_data *)data;
 
 	draw_grid(data);
+	print_cursor_coordinates(data);
 }
 
 int	main(void)
@@ -54,6 +70,12 @@ int	main(void)
 
 	initialize(&data);
 	initialize_mlx(&data);
+	draw_grid(&data);
+
+	mlx_image_t *img = mlx_new_image(data.mlx, 60, 60);
+	memset(img->pixels, 255, 60 * 60 * sizeof(int32_t));
+	mlx_image_to_window(data.mlx, img, 0, 0);
+
 	mlx_loop_hook(data.mlx, loop_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);

@@ -17,8 +17,8 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 500
+# define HEIGHT 500
 # define DEFAULT_SCALE 1
 # define DEFAULT_WORK_PER_FRAME 100
 
