@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 18:17:27 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 20:50:30 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # define HEIGHT 500
 # define DEFAULT_SCALE 1
 # define DEFAULT_WORK_PER_FRAME 100
+
+// illegal
+# include <string.h>
 
 typedef struct s_complex
 {
@@ -48,5 +51,7 @@ void	zoom_to_point(t_data *data, int x, int y, float change);
 int		initialize(t_data *data);
 int		initialize_mlx(t_data *data);
 void	loop_hook(void *input);
+void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
+void	clear_screen(t_data *data);
 
 #endif

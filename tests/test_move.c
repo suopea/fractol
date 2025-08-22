@@ -2,7 +2,6 @@
 #include "MLX42/MLX42.h"
 #include "fractal.h"
 #include <stdio.h>
-#include <string.h>
 
 void	print_cursor_coordinates(t_data *data)
 {
@@ -58,7 +57,6 @@ void	draw_grid(t_data *data)
 
 void	loop_hook(void *data)
 {
-	data = (t_data *)data;
 
 	draw_grid(data);
 	print_cursor_coordinates(data);
@@ -72,10 +70,7 @@ int	main(void)
 	initialize_mlx(&data);
 	draw_grid(&data);
 
-	mlx_image_t *img = mlx_new_image(data.mlx, 60, 60);
-	memset(img->pixels, 255, 60 * 60 * sizeof(int32_t));
-	mlx_image_to_window(data.mlx, img, 0, 0);
-
+	mlx_mouse_hook(data.mlx, &mouse_hook, &data);
 	mlx_loop_hook(data.mlx, loop_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);

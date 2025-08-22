@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 20:46:46 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 20:48:20 by ssuopea          ###   ########.fr       */
+/*   Created: 2025/08/22 20:48:52 by ssuopea           #+#    #+#             */
+/*   Updated: 2025/08/22 20:50:58 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 
-void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input)
+void	clear_screen(t_data *data)
 {
-	t_data *data = input;
-	int	x;
-	int y;
-
-	(void)mods;
-	clear_screen(data);
-	mlx_get_mouse_pos(data->mlx, &x, &y);	
-	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
-		move_center(data, x, y);
+	memset(data->frame->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
 }
+
