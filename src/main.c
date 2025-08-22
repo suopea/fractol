@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 16:52:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/14 17:05:06 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 17:20:00 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int main(void)
 	t_data	data;
 
 	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	data.live_frame = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	bzero(data.live_frame->pixels, WIDTH * HEIGHT * sizeof(int32_t));
-	set_alpha(data.live_frame->pixels);
+	data.frame = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	bzero(data.frame->pixels, WIDTH * HEIGHT * sizeof(int32_t));
+	set_alpha(data.frame->pixels);
 	// gradient(data.live_frame);
 	if (mlx_image_to_window(data.mlx, data.live_frame, 0, 0) == -1)
 	{

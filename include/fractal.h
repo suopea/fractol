@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 14:24:14 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 18:17:27 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 5
-# define HEIGHT 5
+# define WIDTH 800
+# define HEIGHT 800
+# define DEFAULT_SCALE 1
+# define DEFAULT_WORK_PER_FRAME 100
 
 typedef struct s_complex
 {
@@ -30,7 +32,7 @@ typedef struct s_data
 {
 	t_complex*		px;
 	t_complex*		orbits;
-	mlx_image_t*	rendered;
+	mlx_image_t*	frame;
 	double			scale;
 	int				iteration;
 	t_complex		location;
@@ -43,5 +45,8 @@ void	move_center(t_data *data, int x, int y);
 int		i(int x, int y);
 int		center(void);
 void	zoom_to_point(t_data *data, int x, int y, float change);
+int		initialize(t_data *data);
+int		initialize_mlx(t_data *data);
+void	loop_hook(void *input);
 
 #endif

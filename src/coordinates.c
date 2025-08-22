@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:07:21 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 14:24:45 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 17:19:13 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	move_center(t_data *data, int x, int y)
 {
 	data->location.r += data->px[i(x, y)].r - data->px[center()].r;
 	data->location.i += data->px[i(x, y)].i - data->px[center()].i;
+	update_origins(data);
 }
 
 void	zoom_to_point(t_data *data, int x, int y, float change)
