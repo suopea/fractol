@@ -11,7 +11,7 @@ OBJS	:= ${SRCS:.c=.o}
 all: $(MLX_LIB) $(NAME)
 	./fractol
 
-repo: $(MLX_LIB)
+mlx: $(MLX_LIB)
 
 d: $(MLX_DIR)
 	$(CC) $(SRCS) $(LIBS) -g $(HEADERS)
