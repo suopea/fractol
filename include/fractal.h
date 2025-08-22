@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/14 17:03:30 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 11:42:17 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 # include <math.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 1020
-# define HEIGHT 1020
-# define START_SCALE 1
+# define WIDTH 5
+# define HEIGHT 5
 
 typedef struct s_complex
 {
@@ -44,5 +44,7 @@ typedef struct s_data
 	int				work_per_frame;			
 	mlx_t*			mlx;
 }	t_data;
+
+void	update_locations(t_data *data);
 
 #endif

@@ -11,6 +11,8 @@ OBJS	:= ${SRCS:.c=.o}
 all: $(MLX_LIB) $(NAME)
 	./fractol
 
+repo: $(MLX_LIB)
+
 d: $(MLX_DIR)
 	$(CC) $(SRCS) $(LIBS) -g $(HEADERS)
 	gdb -tui a.out
@@ -34,6 +36,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf $(MLX_DIR)
+	@rm compile_commands.json
 
 
 re: clean all
