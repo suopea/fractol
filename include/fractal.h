@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 12:05:18 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/23 13:42:53 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include "MLX42/MLX42.h"
 # define WIDTH 1200
 # define HEIGHT 800
-# define DEFAULT_SCALE 1
+# define DEFAULT_SCALE 0.005
 # define SCROLL_AMOUNT 1.05
-# define DEFAULT_WORK_PER_FRAME 10
+# define DEFAULT_WORK_PER_FRAME 1
 
 // illegal
 # include <string.h>
@@ -57,7 +57,7 @@ int		initialize_mlx(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
 void	clear_screen(t_data *data);
 void	scroll_hook(double xdelta, double ydelta, void *input);
-void	iterate_all_pixels_once(t_complex *px, t_complex *orbits);
+void	iterate_all_pixels_once(t_data *data);
 void	colorize_pixels(t_data *data);
 int		x(int i);
 int		y(int i);

@@ -24,7 +24,7 @@ $(MLX_LIB): $(MLX_DIR)
 $(MLX_DIR):
 	git clone https://github.com/codam-coding-college/MLX42.git
 
-%.o: %.c
+%.o: %.c ./include/fractal.h
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)

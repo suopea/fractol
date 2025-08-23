@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:06:27 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 11:26:06 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/23 13:45:00 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ int	initialize(t_data *data)
 	if (!data->orbits)
 	{
 		free(data->px);
+		return (0);
+	}
+	data->escape_times = malloc(data->px_count * sizeof(int));
+	if (!data->escape_times)
+	{
+		free(data->px);
+		free(data->orbits);
 		return (0);
 	}
 	data->scale = DEFAULT_SCALE;

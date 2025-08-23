@@ -37,5 +37,6 @@ void	colorize_pixels(t_data *data)
 			normalized = normal(data->escape_times[i], data->iteration);
 			mlx_put_pixel(data->frame, x(i), y(i), normalized);
 		}	
+		i++;
 	}
 }

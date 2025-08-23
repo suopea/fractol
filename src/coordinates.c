@@ -12,6 +12,21 @@
 
 #include "fractal.h"
 
+static void	reset_orbits(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->iteration = 0;
+	while (i < data->px_count)
+	{
+		data->orbits[i].r = 0;
+		data->orbits[i].i = 0;
+		data->escape_times[i] = 0;
+		i++;
+	}
+}
+
 void	update_origins(t_data *data)
 {
 	int	row;
@@ -29,6 +44,7 @@ void	update_origins(t_data *data)
 		}
 		row++;
 	}
+	reset_orbits(data);
 }
 
 void	move_center(t_data *data, int x, int y)
