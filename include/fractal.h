@@ -17,7 +17,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 1200
+# define WIDTH 1000
 # define HEIGHT 800
 # define DEFAULT_SCALE 0.005
 # define SCROLL_AMOUNT 1.05
@@ -37,7 +37,7 @@ typedef struct s_data
 	t_complex		*px;
 	int				px_count;
 	t_complex		*orbits;
-	int				*escape_times;
+	double			*escape_times;
 	mlx_image_t		*frame;
 	double			scale;
 	int				iteration;

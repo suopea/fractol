@@ -25,6 +25,12 @@ static int	escaped(t_complex orbit)
 	return (hypot(orbit.i, orbit.r) > 4);
 }
 
+static double	smoothing(t_complex z)
+{
+	double	log_z = log(z.i * z.i + z.r * z.r) / 2;
+	return (log(log_z / M_LN2) / M_LN2);
+}
+
 void	iterate_all_pixels_once(t_data *data)
 {
 	int	i;
@@ -36,7 +42,10 @@ void	iterate_all_pixels_once(t_data *data)
 		{
 			iterate_pixel(&data->px[i].r, &data->px[i].i, &data->orbits[i].r, &data->orbits[i].i);
 			if (escaped(data->orbits[i]))
+			{
 				data->escape_times[i] = data->iteration;
+				data->escape_times[i] -= smoothing(data->orbits[i]);
+			}
 		}
 		i++;
 	}

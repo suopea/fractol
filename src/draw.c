@@ -17,11 +17,15 @@ void	clear_screen(t_data *data)
 	memset(data->frame->pixels, 0, data->px_count * sizeof(int32_t));
 }
 
-static	int32_t	normal(int value, int max)
+// static	int32_t	normal(int value, int max)
+// {
+// 	// return ((0xFFFFFF * ((value / max) % 0xFFFF)) << 8 | 0xFF);
+// 	return (((max / value % 16) * 0x111111) << 8 | 0xFF);
+// }
+
+static int32_t	smooth_color(double value, int max)
 {
-	// return ((0xFFFFFF * ((value / max) % 0xFF)) << 8);
-	// return ((0xFFFFFF * ((value / max) % 0xFFFF)) << 8 | 0xFF);
-	return (((max / value % 16) * 0x111111) << 8 | 0xFF);
+	return ((lrint(fmod(max / value, 16)) * 0x101010) << 8 | 0xFF);
 }
 
 void	colorize_pixels(t_data *data)
@@ -36,7 +40,7 @@ void	colorize_pixels(t_data *data)
 			mlx_put_pixel(data->frame, x(i), y(i), 0xFF);
 		else
 		{
-			normalized = normal(data->escape_times[i], data->iteration);
+			normalized = smooth_color(data->escape_times[i], data->iteration);
 			mlx_put_pixel(data->frame, x(i), y(i), normalized);
 		}	
 		i++;
