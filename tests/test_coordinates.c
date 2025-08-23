@@ -11,7 +11,7 @@ void	print_points(t_data data)
 		column = 0;
 		while (column < WIDTH)
 		{
-			printf("%.1f, %.1f\t", 
+			printf("%.3f, %.3f\t", 
 					data.px[i(column, row)].r,
 					data.px[i(column, row)].i);
 			column++;
@@ -58,19 +58,17 @@ int	main(void)
 	t_data	data;
 
 	data.px = malloc(WIDTH * HEIGHT * sizeof(t_complex));
-	test(&data, 1, 0, 0);
-	test(&data, 2, 0, 0);
-	test(&data, 2, -1, -1);
-	test(&data, 0.5, -1, -1);
-
-	test_move(&data, 1, 1);
-	test_move(&data, 3, 1);
-
-	test(&data, 1, 0, 0);
-
-	test_zoom(&data, 1, 1, 2);
-	test_zoom(&data, 3, 1, 0.5);
-	test_zoom(&data, 3, 1, 1);
+	test(&data, 1, -1, -1);
+	test_zoom(&data, 1, 1, 1 / 1.5);
+	// test(&data, 2, 0, 0);
+	// test(&data, 2, -1, -1);
+	// test(&data, 0.5, -1, -1);
+	// test_move(&data, 1, 1);
+	// test_move(&data, 3, 1);
+	// test(&data, 1, 0, 0);
+	// test_zoom(&data, 1, 1, 2);
+	// test_zoom(&data, 3, 1, 0.5);
+	// test_zoom(&data, 3, 1, 1);
 
 }
 

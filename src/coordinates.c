@@ -42,8 +42,8 @@ void	zoom_to_point(t_data *data, int x, int y, float change)
 {
 	if (change < 1)
 	{
-		data->location.r += (data->px[i(x, y)].r - data->location.r) * change;
-		data->location.i += (data->px[i(x, y)].i - data->location.i) * change;
+		data->location.r += (data->px[i(x, y)].r - data->location.r) * (1 - change);
+		data->location.i += (data->px[i(x, y)].i - data->location.i) * (1 - change);
 	}
 	else
 	{

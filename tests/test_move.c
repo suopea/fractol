@@ -57,7 +57,6 @@ void	draw_grid(t_data *data)
 
 void	loop_hook(void *data)
 {
-
 	draw_grid(data);
 	print_cursor_coordinates(data);
 }

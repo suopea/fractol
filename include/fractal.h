@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 21:02:38 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/22 21:25:25 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 800
+# define HEIGHT 1000
 # define DEFAULT_SCALE 1
-# define SCROLL_AMOUNT 1.2
+# define SCROLL_AMOUNT 1.5
 # define DEFAULT_WORK_PER_FRAME 100
 
 // illegal
