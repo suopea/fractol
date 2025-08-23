@@ -20,7 +20,8 @@ void	clear_screen(t_data *data)
 static	int32_t	normal(int value, int max)
 {
 	// return ((0xFFFFFF * ((value / max) % 0xFF)) << 8);
-	return ((0xFFFFFF * ((value / max) % 0xFF)));
+	// return ((0xFFFFFF * ((value / max) % 0xFFFF)) << 8 | 0xFF);
+	return (((max / value % 16) * 0x111111) << 8 | 0xFF);
 }
 
 void	colorize_pixels(t_data *data)
@@ -32,7 +33,7 @@ void	colorize_pixels(t_data *data)
 	while (i < data->px_count)
 	{
 		if (!data->escape_times[i])
-			mlx_put_pixel(data->frame, x(i), y(i), 0);
+			mlx_put_pixel(data->frame, x(i), y(i), 0xFF);
 		else
 		{
 			normalized = normal(data->escape_times[i], data->iteration);

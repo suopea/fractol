@@ -17,7 +17,6 @@ static void	iterate_pixel(double *ci, double *cr, double *zi, double *zr)
 	double zr2 = *zr * *zr;
 	double zi2 = *zi * *zi;
 	*zi = (*zr + *zr) * *zi + *ci;
-	// *zr = *zr * *zr - *zi * *zi + *cr;
 	*zr = zr2 - zi2 + *cr;
 }
 
@@ -33,11 +32,11 @@ void	iterate_all_pixels_once(t_data *data)
 	i = 0;
 	while (i < data->px_count)
 	{
-		if (!data->escape_times[i])	
+		if (1)	
 		{
 			iterate_pixel(&data->px[i].r, &data->px[i].i, &data->orbits[i].r, &data->orbits[i].i);
 			if (escaped(data->orbits[i]))
-				data->escape_times[i] = i;
+				data->escape_times[i] = data->iteration;
 		}
 		i++;
 	}

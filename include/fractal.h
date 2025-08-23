@@ -21,7 +21,7 @@
 # define HEIGHT 800
 # define DEFAULT_SCALE 0.005
 # define SCROLL_AMOUNT 1.05
-# define DEFAULT_WORK_PER_FRAME 1
+# define DEFAULT_WORK_PER_FRAME 10
 
 // illegal
 # include <string.h>
