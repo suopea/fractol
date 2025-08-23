@@ -17,10 +17,10 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 800
-# define HEIGHT 1000
+# define WIDTH 1200
+# define HEIGHT 800
 # define DEFAULT_SCALE 1
-# define SCROLL_AMOUNT 1.5
+# define SCROLL_AMOUNT 1.05
 # define DEFAULT_WORK_PER_FRAME 100
 
 // illegal

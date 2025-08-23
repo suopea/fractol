@@ -36,7 +36,7 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 	mlx_get_mouse_pos(data->mlx, &x, &y);	
 	if (ydelta > 0)
 		zoom_to_point(data, x, y, 1.0 / SCROLL_AMOUNT);
-	if (ydelta < 0)
+	if (ydelta < 0 && data->scale < 10)
 		zoom_to_point(data, x, y, SCROLL_AMOUNT);
 }
 

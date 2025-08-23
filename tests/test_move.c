@@ -11,7 +11,7 @@ void	print_cursor_coordinates(t_data *data)
 
 	string = malloc(1000);
 	mlx_get_mouse_pos(data->mlx, &x, &y);	
-	sprintf(string, "px: %i, %i | plane: %.1f, %.1f", x, y, data->px[i(x, y)].r, data->px[i(x, y)].i);
+	sprintf(string, "px: %i, %i | plane: %.1f, %.1f | scale: %.15f", x, y, data->px[i(x, y)].r, data->px[i(x, y)].i, data->scale);
 	mlx_set_window_title(data->mlx, string);
 	free(string);
 }
