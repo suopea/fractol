@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:06:27 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 17:37:35 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/23 11:26:06 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 int	initialize(t_data *data)
 {
-	data->px = malloc(WIDTH * HEIGHT * sizeof(t_complex));
+	data->px_count = WIDTH * HEIGHT;
+	data->px = malloc(data->px_count * sizeof(t_complex));
 	if (!data->px)
 		return (0);
-	data->orbits = malloc(WIDTH * HEIGHT * sizeof(t_complex));
+	data->orbits = malloc(data->px_count * sizeof(t_complex));
 	if (!data->orbits)
 	{
 		free(data->px);
