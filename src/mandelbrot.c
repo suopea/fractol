@@ -14,8 +14,11 @@
 
 static void	iterate_pixel(double *cr, double *ci, double *zr, double *zi)
 {
+	double zr2 = *zr * *zr;
+	double zi2 = *zi * *zi;
 	*zi = (*zr + *zr) * *zi + *ci;
-	*zr = *zr * *zr + *zi * *zi + *cr;
+	// *zr = *zr * *zr - *zi * *zi + *cr;
+	*zr = zr2 - zi2 + *cr;
 }
 
 static int	escaped(t_complex orbit)
@@ -25,7 +28,7 @@ static int	escaped(t_complex orbit)
 
 void	iterate_all_pixels_once(t_data *data)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (i < data->px_count)
