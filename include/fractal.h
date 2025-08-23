@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 11:41:37 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/23 12:05:18 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@ typedef struct s_complex
 
 typedef struct s_data
 {
-	t_complex*		px;
+	t_complex		*px;
 	int				px_count;
-	t_complex*		orbits;
-	mlx_image_t*	frame;
+	t_complex		*orbits;
+	int				*escape_times;
+	mlx_image_t		*frame;
 	double			scale;
 	int				iteration;
 	t_complex		location;
 	int				work_per_frame;			
-	mlx_t*			mlx;
+	mlx_t			*mlx;
 }	t_data;
 
 void	update_origins(t_data *data);
@@ -58,5 +59,7 @@ void	clear_screen(t_data *data);
 void	scroll_hook(double xdelta, double ydelta, void *input);
 void	iterate_all_pixels_once(t_complex *px, t_complex *orbits);
 void	colorize_pixels(t_data *data);
+int		x(int i);
+int		y(int i);
 
 #endif

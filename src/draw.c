@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 20:48:52 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 20:50:58 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/23 12:10:42 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,28 @@
 
 void	clear_screen(t_data *data)
 {
-	memset(data->frame->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
+	memset(data->frame->pixels, 0, data->px_count * sizeof(int32_t));
 }
 
+static	int	normal(int value, int max)
+{
+	return (0xFFFFFF * ((value / max) % 0xFF));
+}
+
+void	colorize_pixels(t_data *data)
+{
+	int	i;
+	int	normalized;
+
+	i = 0;
+	while (i < data->px_count)
+	{
+		if (!data->escape_times[i])
+			mlx_put_pixel(data->frame, x(i), y(i), 0);
+		else
+		{
+			normalized = normal(data->escape_times[i], data->iteration);
+			mlx_put_pixel(data->frame, x(i), y(i), normalized);
+		}	
+	}
+}

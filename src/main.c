@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 16:52:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 18:22:27 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/23 11:42:09 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,51 +15,34 @@
 #include <string.h>
 #include <stdio.h>
 
-void	increment_pixel(uint8_t *pixel)
-{
-	pixel[0]++;
-	// pixel[1]++;
-	// pixel[2]++;
-}
-
-
-void	loop_hook(void *input)
-{
-	t_data	*data = input;
-	(void)data;
-}
-
-void	set_alpha(uint8_t *pixels)
-{
-	int i = 0;
-
-	while (i < WIDTH * HEIGHT)
-	{
-		pixels[i * 4 + 3] = 0xFF;
-		pixels[i * 4 + 0] = i;
-		// pixels[i * 4 + 1] = i;
-		// pixels[i * 4 + 2] = i;
-		i++;
-	}
-}
+static void	loop_hook(void *input);
 
 int main(void)
 {
 	t_data	data;
 
-	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	data.frame = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	bzero(data.frame->pixels, WIDTH * HEIGHT * sizeof(int32_t));
-	set_alpha(data.frame->pixels);
-	// gradient(data.live_frame);
-	if (mlx_image_to_window(data.mlx, data.live_frame, 0, 0) == -1)
-	{
-		mlx_close_window(data.mlx);
-		return(1);
-	}
+	initialize(&data);
+	initialize_mlx(&data);
+	mlx_mouse_hook(data.mlx, &mouse_hook, &data);
+	mlx_scroll_hook(data.mlx, &scroll_hook, &data);
 	mlx_loop_hook(data.mlx, &loop_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0);
 }
 
+static void	loop_hook(void *input)
+{
+	t_data	*data;
+	int		i;
+
+	data = input;
+	i = 0;
+	while (i < data->work_per_frame)
+	{
+		iterate_all_pixels_once(data->px, data->orbits);
+		data->iteration++;
+		i++;
+	}
+	colorize_pixels(data);
+}
