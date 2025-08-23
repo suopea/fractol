@@ -12,7 +12,7 @@
 
 #include "fractal.h"
 
-static void	iterate_pixel(double *cr, double *ci, double *zr, double *zi)
+static void	iterate_pixel(double *ci, double *cr, double *zi, double *zr)
 {
 	double zr2 = *zr * *zr;
 	double zi2 = *zi * *zi;
