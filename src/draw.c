@@ -25,7 +25,8 @@ void	clear_screen(t_data *data)
 
 static int32_t	smooth_color(double value, int max)
 {
-	return ((lrint(fmod(max / value, 16)) * 0x101010) << 8 | 0xFF);
+	// return ((lrint(fmod(max / value, 16)) * 0x111111) << 8 | 0xFF);
+	return (((max / (lrint(value) + 3) % 16) * 0x111111) << 8 | 0xFF);
 }
 
 void	colorize_pixels(t_data *data)
@@ -40,6 +41,11 @@ void	colorize_pixels(t_data *data)
 			mlx_put_pixel(data->frame, x(i), y(i), 0xFF);
 		else
 		{
+			if (data->escape_times[i] < 0)
+			{
+				printf("%f (%i)\n", data->escape_times[i], data->iteration);
+
+			}
 			normalized = smooth_color(data->escape_times[i], data->iteration);
 			mlx_put_pixel(data->frame, x(i), y(i), normalized);
 		}	

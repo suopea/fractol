@@ -43,7 +43,7 @@ void	iterate_all_pixels_once(t_data *data)
 			iterate_pixel(&data->px[i].r, &data->px[i].i, &data->orbits[i].r, &data->orbits[i].i);
 			if (escaped(data->orbits[i]))
 			{
-				data->escape_times[i] = data->iteration;
+				data->escape_times[i] = rint(data->iteration);
 				// data->escape_times[i] -= smoothing(data->orbits[i]);
 			}
 		}
