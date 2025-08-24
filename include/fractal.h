@@ -53,7 +53,6 @@ typedef struct s_data
 void	update_origins(t_data *data);
 void	reset_orbits(t_data *data);
 void	move_center(t_data *data, int x, int y);
-int		i(int x, int y);
 int		center(void);
 void	zoom_to_point(t_data *data, int x, int y, float change);
 int		initialize(t_data *data);
@@ -65,7 +64,9 @@ void	scroll_hook(double xdelta, double ydelta, void *input);
 void	key_hook(mlx_key_data_t keydata, void *input);
 void	iterate_all_pixels_once(t_data *data);
 void	colorize_pixels(t_data *data);
+int		i(int x, int y);
 int		x(int i);
 int		y(int i);
+void	free_everything(t_data *data);
 
 #endif

@@ -53,3 +53,15 @@ int initialize_mlx(t_data *data)
 		return (0);
 	return (1);
 }
+
+void	free_everything(t_data *data)
+{
+	if (data->escape_times)
+		free(data->escape_times);
+	if (data->orbits)
+		free(data->orbits);
+	if (data->px)
+		free(data->px);
+	if (data->frame)
+		mlx_delete_image(data->mlx, data->frame);
+}

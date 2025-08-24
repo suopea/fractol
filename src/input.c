@@ -46,7 +46,10 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 
 	data = input;
 	if (keydata.key == KEY_ESC && keydata.action == MLX_PRESS)
-		mlx_terminate(data->mlx);
+	{
+		free_everything(data);
+		mlx_close_window(data->mlx);
+	}
 	if (keydata.key == KEY_REITERATE && keydata.action == MLX_PRESS)
 		reset_orbits(data);
 	if (keydata.key == KEY_RESET && keydata.action == MLX_PRESS)
