@@ -6,18 +6,17 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 11:20:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 13:23:08 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/24 10:29:19 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 
-static void	iterate_pixel(double *ci, double *cr, double *zi, double *zr)
+static void	iterate_pixel(t_complex *c, t_complex *z)
 {
-	double zr2 = *zr * *zr;
-	double zi2 = *zi * *zi;
-	*zi = (*zr + *zr) * *zi + *ci;
-	*zr = zr2 - zi2 + *cr;
+	double temp = z->i * z->i - z->r * z->r;
+	z->r = (z->i + z->i) * z->r + c->r;
+	z->i = temp + c->i;
 }
 
 static int	escaped(t_complex orbit)
@@ -32,12 +31,9 @@ void	iterate_all_pixels_once(t_data *data)
 	i = 0;
 	while (i < data->px_count)
 	{
-		if (1)	
-		{
-			iterate_pixel(&data->px[i].r, &data->px[i].i, &data->orbits[i].r, &data->orbits[i].i);
-			if (escaped(data->orbits[i]))
-				data->escape_times[i] = data->iteration;
-		}
+		iterate_pixel(&data->px[i], &data->orbits[i]);
+		if (escaped(data->orbits[i]))
+			data->escape_times[i] = data->iteration;
 		i++;
 	}
 	data->iteration++;
