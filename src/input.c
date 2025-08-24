@@ -40,3 +40,16 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 		zoom_to_point(data, x, y, SCROLL_AMOUNT);
 }
 
+void	key_hook(mlx_key_data_t keydata, void *input)
+{
+	t_data	*data;
+
+	data = input;
+	if (keydata.key == KEY_ESC && keydata.action == MLX_PRESS)
+		mlx_terminate(data->mlx);
+	if (keydata.key == KEY_REITERATE && keydata.action == MLX_PRESS)
+		reset_orbits(data);
+	if (keydata.key == KEY_RESET && keydata.action == MLX_PRESS)
+		initialize(data);
+}
+

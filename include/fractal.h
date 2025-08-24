@@ -22,6 +22,10 @@
 # define DEFAULT_SCALE 0.005
 # define SCROLL_AMOUNT 1.05
 # define DEFAULT_WORK_PER_FRAME 10
+# define KEY_ESC MLX_KEY_ESCAPE
+# define KEY_REITERATE MLX_KEY_I
+# define KEY_RESET MLX_KEY_R
+
 
 // illegal
 # include <string.h>
@@ -47,6 +51,7 @@ typedef struct s_data
 }	t_data;
 
 void	update_origins(t_data *data);
+void	reset_orbits(t_data *data);
 void	move_center(t_data *data, int x, int y);
 int		i(int x, int y);
 int		center(void);
@@ -54,9 +59,10 @@ void	zoom_to_point(t_data *data, int x, int y, float change);
 int		initialize(t_data *data);
 int		initialize_mlx(t_data *data);
 // void	loop_hook(void *input);
-void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
 void	clear_screen(t_data *data);
+void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
 void	scroll_hook(double xdelta, double ydelta, void *input);
+void	key_hook(mlx_key_data_t keydata, void *input);
 void	iterate_all_pixels_once(t_data *data);
 void	colorize_pixels(t_data *data);
 int		x(int i);

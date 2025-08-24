@@ -12,7 +12,7 @@
 
 #include "fractal.h"
 
-static void	reset_orbits(t_data *data)
+void	reset_orbits(t_data *data)
 {
 	int	i;
 
