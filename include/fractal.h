@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 13:42:53 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/24 10:42:26 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int		center(void);
 void	zoom_to_point(t_data *data, int x, int y, float change);
 int		initialize(t_data *data);
 int		initialize_mlx(t_data *data);
-// void	loop_hook(void *input);
 void	clear_screen(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
 void	scroll_hook(double xdelta, double ydelta, void *input);
 void	key_hook(mlx_key_data_t keydata, void *input);
-void	iterate_all_pixels_once(t_data *data);
+void	mandelbrot_once(t_data *data);
+void	julia_once(t_data *data);
 void	colorize_pixels(t_data *data);
 int		i(int x, int y);
 int		x(int i);
