@@ -2,6 +2,6 @@
 *.idx
 *.o
 a.out
-.cache
+.cache/
 MLX42
 fractol

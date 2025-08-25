@@ -19,8 +19,6 @@ void	clear_screen(t_data *data)
 
 static	int32_t	normal(int value, int max)
 {
-	// return ((0xFFFFFF * ((value / max) % 0xFF)) << 8);
-	// return ((0xFFFFFF * ((value / max) % 0xFFFF)) << 8 | 0xFF);
 	return (((max / value % 16) * 0x111111) << 8 | 0xFF);
 }
 
