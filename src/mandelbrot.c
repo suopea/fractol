@@ -22,7 +22,7 @@ static void	iterate_pixel(double *ci, double *cr, double *zi, double *zr)
 
 static int	escaped(t_complex orbit)
 {
-	return (hypot(orbit.i, orbit.r) > 4);
+	return (orbit.i * orbit.i + orbit.r * orbit.r > 4);
 }
 
 void	iterate_all_pixels_once(t_data *data)
