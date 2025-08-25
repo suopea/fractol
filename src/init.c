@@ -25,7 +25,7 @@ int	initialize(t_data *data)
 		free(data->px);
 		return (0);
 	}
-	data->escape_times = malloc(data->px_count * sizeof(int));
+	data->escape_times = calloc(data->px_count, sizeof(int));
 	if (!data->escape_times)
 	{
 		free(data->px);

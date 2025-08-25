@@ -12,17 +12,17 @@
 
 #include "fractal.h"
 
-static void	iterate_pixel(double *ci, double *cr, double *zi, double *zr)
+static void	iterate_pixel(t_complex *c, t_complex *z, t_data *data, int i)
 {
-	double zr2 = *zr * *zr;
-	double zi2 = *zi * *zi;
-	*zi = (*zr + *zr) * *zi + *ci;
-	*zr = zr2 - zi2 + *cr;
-}
+	double	i_squared;
+	double	r_squared;
 
-static int	escaped(t_complex orbit)
-{
-	return (hypot(orbit.i, orbit.r) > 4);
+	i_squared = z->i * z->i;
+	r_squared = z->r * z->r;
+	z->r = (z->i + z->i) * z->r + c->r;
+	z->i = i_squared - r_squared + c->i;
+	if (i_squared + r_squared > 4)
+		data->escape_times[i] = data->iteration;
 }
 
 void	iterate_all_pixels_once(t_data *data)
@@ -32,12 +32,8 @@ void	iterate_all_pixels_once(t_data *data)
 	i = 0;
 	while (i < data->px_count)
 	{
-		if (1)	
-		{
-			iterate_pixel(&data->px[i].r, &data->px[i].i, &data->orbits[i].r, &data->orbits[i].i);
-			if (escaped(data->orbits[i]))
-				data->escape_times[i] = data->iteration;
-		}
+		if (!data->escape_times[i])	
+			iterate_pixel(&data->px[i], &data->orbits[i], data, i);
 		i++;
 	}
 	data->iteration++;
