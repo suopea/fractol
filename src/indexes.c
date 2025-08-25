@@ -12,22 +12,22 @@
 
 #include "fractal.h"
 
-int	i(int x, int y)
+int	i(int x, int y, t_data *data)
 {
-	return(y * WIDTH + x);
+	return(y * data->width + x);
 }
 
-int	center(void)
+int	center(t_data *data)
 {
-	return(i(WIDTH / 2, HEIGHT / 2));
+	return(i(data->width / 2, data->height / 2, data));
 }
 
-int	x(int i)
+int	x(int i, t_data *data)
 {
-	return (i % WIDTH);
+	return (i % data->width);
 }
 
-int y(int i)
+int y(int i, t_data *data)
 {
-	return (i / WIDTH);
+	return (i / data->width);
 }
