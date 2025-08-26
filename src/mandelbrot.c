@@ -25,6 +25,22 @@ static void	iterate_pixel(t_complex *c, t_complex *z, t_data *data, int i)
 		data->escape_times[i] = data->iteration;
 }
 
+static void	iterate_and_check_escape(t_complex *c, t_complex *z, t_data *data, int i)
+{
+	double	i_squared;
+	double	r_squared;
+
+	i_squared = z->i * z->i;
+	r_squared = z->r * z->r;
+	z->r = (z->i + z->i) * z->r + c->r;
+	z->i = i_squared - r_squared + c->i;
+	if (i_squared + r_squared > 4)
+	{
+		data->escape_times[i] = data->iteration;
+		data->all_black = 0;
+	}
+}
+
 void	iterate_all_pixels_once(t_data *data)
 {
 	int	i;
@@ -37,4 +53,22 @@ void	iterate_all_pixels_once(t_data *data)
 		i++;
 	}
 	data->iteration++;
+}
+
+void	iterate_until_first_escape(t_data *data)
+{
+	int	i;
+
+	data->all_black = true;
+	while (data->all_black)
+	{
+		i = 0;
+		while (i < data->px_count)
+		{
+			iterate_and_check_escape(&data->px[i], &data->orbits[i], data, i);
+			i++;
+		}
+		printf("%i ", data->iteration);
+		data->iteration++;
+	}
 }

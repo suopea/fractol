@@ -32,6 +32,7 @@
 
 // illegal
 # include <string.h>
+# include <stdio.h>
 
 typedef struct s_complex
 {
@@ -58,7 +59,8 @@ typedef struct s_data
 	int				new_px_count;
 	bool			paused;
 	int				resizing;
-	int			wait;
+	int				wait;
+	bool			all_black;
 }	t_data;
 
 void	update_origins(t_data *data);
@@ -76,6 +78,7 @@ void	scroll_hook(double xdelta, double ydelta, void *input);
 void	key_hook(mlx_key_data_t keydata, void *input);
 void	resize_hook(int32_t width, int32_t height, void *input);
 void	iterate_all_pixels_once(t_data *data);
+void	iterate_until_first_escape(t_data *data);
 void	colorize_pixels(t_data *data);
 int		center(t_data *data);
 int		i(int x, int y, t_data *data);

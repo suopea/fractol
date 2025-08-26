@@ -68,4 +68,5 @@ void	zoom_to_point(t_data *data, int x, int y, float change)
 	}
 	data->scale *= change;
 	update_origins(data);
+	iterate_until_first_escape(data);
 }

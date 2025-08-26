@@ -56,6 +56,7 @@ void	reset(t_data *data)
 	data->location.i = 0;
 	data->location.r = 0;
 	data->iteration = 0;
+	data->all_black = true;
 	update_origins(data);
 	new_location_from_center(data, 0, 0);
 }
