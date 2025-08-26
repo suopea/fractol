@@ -71,15 +71,14 @@ typedef struct s_data
 	e_fractal		type;
 }	t_data;
 
-void	update_origins(t_data *data);
+void	update_locations(t_data *data);
 void	reset_orbits(t_data *data);
 void	new_location_from_center(t_data *data, int x, int y);
 void	zoom_to_point(t_data *data, int x, int y, float change);
 int		initialize_program(t_data *data);
 int		initialize_mlx(t_data *data);
 void	allocate_everything(t_data *data);
-void	reset_mandelbrot(t_data *data);
-void	reset_julia(t_data *data);
+void	reset(t_data *data);
 int		about_to_resize(t_data *data);
 void	clear_screen(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);

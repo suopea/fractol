@@ -17,43 +17,49 @@ void	reset_orbits(t_data *data)
 	int	i;
 
 	i = 0;
-	data->iteration = 0;
 	while (i < data->px_count)
 	{
-		data->orbits[i].r = 0;
-		data->orbits[i].i = 0;
+		if (data->type == mandelbrot)
+		{
+			data->orbits[i].r = 0;
+			data->orbits[i].i = 0;
+		}
 		data->escape_times[i] = 0;
 		i++;
 	}
+	data->iteration = 0;
 }
 
-void	update_origins(t_data *data)
+void	update_locations(t_data *data)
 {
 	int	row;
 	int	column;
+	t_complex	*pixel;
 
+	if (data->type == mandelbrot)
+		pixel = data->px;
+	else
+		pixel = data->orbits;
 	row = 0;
 	while (row < data->height)
 	{
 		column = 0;
 		while (column < data->width)
 		{
-			data->px[i(column, row, data)].r = data->location.r + row * data->scale;
-			data->px[i(column, row, data)].i = data->location.i + column * data->scale;
+			pixel[i(column, row, data)].r = data->location.r + row * data->scale;
+			pixel[i(column, row, data)].i = data->location.i + column * data->scale;
 			column++;
 		}
 		row++;
 	}
-	if (data->type == mandelbrot)
-		reset_orbits(data);
+	reset_orbits(data);
 }
 
 void	new_location_from_center(t_data *data, int x, int y)
 {
 	data->location.r += data->px[i(x, y, data)].r - data->px[center(data)].r;
 	data->location.i += data->px[i(x, y, data)].i - data->px[center(data)].i;
-	if (data->type == mandelbrot)
-		update_origins(data);
+	update_locations(data);
 }
 
 void	zoom_to_point(t_data *data, int x, int y, float change)
@@ -69,7 +75,6 @@ void	zoom_to_point(t_data *data, int x, int y, float change)
 		data->location.i -= (data->px[i(x, y, data)].i - data->location.i) * (change - 1);
 	}
 	data->scale *= change;
-	if (data->type == mandelbrot)
-		update_origins(data);
-	iterate_until_first_escape(data);
+	update_locations(data);
+	// iterate_until_first_escape(data);
 }

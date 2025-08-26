@@ -63,7 +63,7 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 	if (keydata.key == KEY_REITERATE && keydata.action == MLX_PRESS)
 		reset_orbits(data);
 	if (keydata.key == KEY_RESET && keydata.action == MLX_PRESS)
-		reset_mandelbrot(data);
+		reset(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		toggle_pause(data);
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
@@ -90,10 +90,10 @@ static void	reset_but_preserve_location(t_data *data)
 		free_and_exit(data);
 	free_everything(data);
 	allocate_everything(data);
-	reset_mandelbrot(data);
+	reset(data);
 	data->location = location_temp;
 	data->scale = scale_temp;
-	update_origins(data);	
+	update_locations(data);	
 }
 
 int	about_to_resize(t_data *data)

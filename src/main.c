@@ -50,7 +50,7 @@ int	initialize_mandelbrot(t_data *data, int argc, char **argv)
 	mlx_resize_hook(data->mlx, resize_hook, data);
 	mlx_loop_hook(data->mlx, loop_mandelbrot, data);
 	mlx_key_hook(data->mlx, key_hook, data);
-	reset_mandelbrot(data);
+	reset(data);
 	return (1);
 }
 
@@ -73,7 +73,7 @@ int initialize_julia(t_data *data, int argc, char **argv)
 	mlx_resize_hook(data->mlx, resize_hook, data);
 	mlx_loop_hook(data->mlx, loop_julia, data);
 	mlx_key_hook(data->mlx, key_hook, data);
-	reset_julia(data);
+	reset(data);
 	return (1);
 }
 
