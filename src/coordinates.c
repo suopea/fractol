@@ -77,7 +77,7 @@ void	zoom_to_point(t_data *data, int x, int y, float change)
 	if (data->type == mandelbrot)
 		pixel = data->px;
 	else
-		pixel = data->orbits;
+		pixel = data->px;
 	if (change < 1)
 	{
 		data->location.r += (pixel[i(x, y, data)].r - data->location.r) * (1 - change);
