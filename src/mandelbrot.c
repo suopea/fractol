@@ -41,7 +41,21 @@ static void	iterate_and_check_escape(t_complex *c, t_complex *z, t_data *data, i
 	}
 }
 
-void	iterate_all_pixels_once(t_data *data)
+void	iterate_julia_once(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->px_count)
+	{
+		if (!data->escape_times[i])	
+			iterate_pixel(&data->c, &data->orbits[i], data, i);
+		i++;
+	}
+	data->iteration++;
+}
+
+void	iterate_mandelbrot_once(t_data *data)
 {
 	int	i;
 

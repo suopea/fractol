@@ -21,7 +21,6 @@ int	initialize_program(t_data *data)
 	data->work_per_frame = DEFAULT_WORK_PER_FRAME;
 	data->wait = DEFAULT_SPEED;
 	allocate_everything(data);
-	reset(data);
 	return (1);
 }
 
@@ -46,7 +45,7 @@ void	allocate_everything(t_data *data)
 		free_and_exit(data);
 }
 
-void	reset(t_data *data)
+void	reset_mandelbrot(t_data *data)
 {
 	data->paused = false;
 	data->resizing = 0;
@@ -59,6 +58,35 @@ void	reset(t_data *data)
 	data->all_black = true;
 	update_origins(data);
 	new_location_from_center(data, 0, 0);
+}
+
+static void	change_all_orbits_to(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->px_count)
+	{
+		data->orbits[i] = data->c;
+		i++;
+	}
+}
+
+void	reset_julia(t_data *data)
+{
+	change_all_orbits_to(data);
+	data->paused = false;
+	data->resizing = 0;
+	data->px_count = data->width * data->height;
+	bzero(data->escape_times, data->px_count);
+	data->scale = DEFAULT_SCALE;
+	data->location.i = 0;
+	data->location.r = 0;
+	data->iteration = 0;
+	data->all_black = true;
+	update_origins(data);
+	new_location_from_center(data, 0, 0);
+	change_all_orbits_to(data);
 }
 
 int initialize_mlx(t_data *data)

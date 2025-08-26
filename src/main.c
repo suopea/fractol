@@ -13,9 +13,10 @@
 #include "MLX42/MLX42.h"
 #include "fractal.h"
 
-static void	loop_hook(void *input);
+static void	loop_mandelbrot(void *input);
 static int	initialize_mandelbrot(t_data *data, int argc, char **argv);
 static int initialize_julia(t_data *data, int argc, char **argv);
+static void	loop_julia(void *input);
 
 int main(int argc, char **argv)
 {
@@ -23,9 +24,9 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 		exit (1);
-	if (strcmp(argv[1], "julia"))
+	if (!strcmp(argv[1], "julia"))
 		initialize_julia(&data, argc, argv);
-	if (strcmp(argv[1], "mandelbrot"))
+	else if (!strcmp(argv[1], "mandelbrot"))
 		initialize_mandelbrot(&data, argc, argv);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
@@ -46,8 +47,9 @@ int	initialize_mandelbrot(t_data *data, int argc, char **argv)
 	mlx_mouse_hook(data->mlx, mouse_hook, data);
 	mlx_scroll_hook(data->mlx, scroll_hook, data);
 	mlx_resize_hook(data->mlx, resize_hook, data);
-	mlx_loop_hook(data->mlx, loop_hook, data);
+	mlx_loop_hook(data->mlx, loop_mandelbrot, data);
 	mlx_key_hook(data->mlx, key_hook, data);
+	reset_mandelbrot(data);
 	return (1);
 }
 
@@ -62,11 +64,14 @@ int initialize_julia(t_data *data, int argc, char **argv)
 		mlx_terminate(data->mlx);
 		exit(1);
 	}
+	data->c.r = strtod(argv[2], NULL);
+	data->c.i = strtod(argv[3], NULL);
 	mlx_mouse_hook(data->mlx, mouse_hook, data);
 	mlx_scroll_hook(data->mlx, scroll_hook, data);
 	mlx_resize_hook(data->mlx, resize_hook, data);
-	mlx_loop_hook(data->mlx, loop_hook, data);
+	mlx_loop_hook(data->mlx, loop_julia, data);
 	mlx_key_hook(data->mlx, key_hook, data);
+	reset_julia(data);
 	return (1);
 }
 
@@ -87,7 +92,7 @@ static void	update_title(t_data *data)
 	free(string);
 }
 
-static void	loop_hook(void *input)
+static void	loop_mandelbrot(void *input)
 {
 	t_data	*data;
 	int		i;
@@ -103,7 +108,30 @@ static void	loop_hook(void *input)
 	i = 0;
 	while (i < data->work_per_frame)
 	{
-		iterate_all_pixels_once(data);
+		iterate_mandelbrot_once(data);
+		i++;
+	}
+	colorize_pixels(data);
+	usleep(data->wait);
+}
+
+static void	loop_julia(void *input)
+{
+	t_data	*data;
+	int		i;
+
+	data = input;
+	if (data->paused)
+		return ;
+	if (about_to_resize(data))
+		return ;
+	update_title(data);
+	while (data->all_black)
+		iterate_until_first_escape(data);
+	i = 0;
+	while (i < data->work_per_frame)
+	{
+		iterate_mandelbrot_once(data);
 		i++;
 	}
 	colorize_pixels(data);
