@@ -66,5 +66,4 @@ void	iterate_until_first_escape(t_data *data)
 		i++;
 	}
 	data->iteration++;
-	printf("%i ", data->iteration);
 }

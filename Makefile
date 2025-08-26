@@ -9,7 +9,7 @@ SRCS	:= $(shell find ./src -iname "*.c")
 OBJS	:= ${SRCS:.c=.o}
 
 all: $(MLX_LIB) $(NAME)
-	./fractol
+	./fractol julia
 
 mlx: $(MLX_LIB)
 

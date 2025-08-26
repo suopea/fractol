@@ -14,27 +14,60 @@
 #include "fractal.h"
 
 static void	loop_hook(void *input);
+static int	initialize_mandelbrot(t_data *data, int argc, char **argv);
+static int initialize_julia(t_data *data, int argc, char **argv);
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_data	data;
 
-	// mlx_set_setting(MLX_STRETCH_IMAGE, true);	
-	if (!initialize_program(&data))
-		return (1);
-	if (!initialize_mlx(&data))
-	{
-		mlx_terminate(data.mlx);
-		return (1);
-	}
-	mlx_mouse_hook(data.mlx, &mouse_hook, &data);
-	mlx_scroll_hook(data.mlx, &scroll_hook, &data);
-	mlx_resize_hook(data.mlx, &resize_hook, &data);
-	mlx_loop_hook(data.mlx, &loop_hook, &data);
-	mlx_key_hook(data.mlx, &key_hook, &data);
+	if (argc < 2)
+		exit (1);
+	if (strcmp(argv[1], "julia"))
+		initialize_julia(&data, argc, argv);
+	if (strcmp(argv[1], "mandelbrot"))
+		initialize_mandelbrot(&data, argc, argv);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0);
+}
+
+int	initialize_mandelbrot(t_data *data, int argc, char **argv)
+{
+	(void)argc;
+	(void)argv;
+	if (!initialize_program(data))
+		exit(1);
+	if (!initialize_mlx(data))
+	{
+		mlx_terminate(data->mlx);
+		exit(1);
+	}
+	mlx_mouse_hook(data->mlx, mouse_hook, data);
+	mlx_scroll_hook(data->mlx, scroll_hook, data);
+	mlx_resize_hook(data->mlx, resize_hook, data);
+	mlx_loop_hook(data->mlx, loop_hook, data);
+	mlx_key_hook(data->mlx, key_hook, data);
+	return (1);
+}
+
+int initialize_julia(t_data *data, int argc, char **argv)
+{
+	(void)argc;
+	(void)argv;
+	if (!initialize_program(data))
+		exit(1);
+	if (!initialize_mlx(data))
+	{
+		mlx_terminate(data->mlx);
+		exit(1);
+	}
+	mlx_mouse_hook(data->mlx, mouse_hook, data);
+	mlx_scroll_hook(data->mlx, scroll_hook, data);
+	mlx_resize_hook(data->mlx, resize_hook, data);
+	mlx_loop_hook(data->mlx, loop_hook, data);
+	mlx_key_hook(data->mlx, key_hook, data);
+	return (1);
 }
 
 #include <stdio.h>
