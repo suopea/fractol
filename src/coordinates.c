@@ -57,8 +57,14 @@ void	update_locations(t_data *data)
 
 void	new_location_from_center(t_data *data, int x, int y)
 {
-	data->location.r += data->px[i(x, y, data)].r - data->px[center(data)].r;
-	data->location.i += data->px[i(x, y, data)].i - data->px[center(data)].i;
+	t_complex	*pixel;
+
+	if (data->type == mandelbrot)
+		pixel = data->px;
+	else
+		pixel = data->orbits;
+	data->location.r += pixel[i(x, y, data)].r - pixel[center(data)].r;
+	data->location.i += pixel[i(x, y, data)].i - pixel[center(data)].i;
 	update_locations(data);
 }
 
