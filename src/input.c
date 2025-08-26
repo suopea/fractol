@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 20:46:46 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 21:07:44 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/26 14:55:21 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 	clear_screen(data);
 	mlx_get_mouse_pos(data->mlx, &x, &y);	
 	if (ydelta > 0)
-		zoom_to_point(data, x, y, 1.0 / SCROLL_AMOUNT);
+	{
+		data->zoom_count++;
+		data->waiting_to_zoom++;
+	}
 	if (ydelta < 0 && data->scale < 10)
-		zoom_to_point(data, x, y, SCROLL_AMOUNT);
+		apply_zoom(data, x, y, SCROLL_AMOUNT);
 }
 
 static void	toggle_pause(t_data *data)
@@ -66,10 +69,10 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		toggle_pause(data);
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		data->wait += SPEED_CHANGE;
+		data->wait_to_draw += SPEED_CHANGE;
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		if (data->wait - SPEED_CHANGE > 0)
-			data->wait -= SPEED_CHANGE;
+		if (data->wait_to_draw - SPEED_CHANGE > 0)
+			data->wait_to_draw -= SPEED_CHANGE;
 }
 
 static void	reset_but_preserve_location(t_data *data)
@@ -97,14 +100,14 @@ static void	reset_but_preserve_location(t_data *data)
 
 int	about_to_resize(t_data *data)
 {
-	if (data->resizing)
+	if (data->waiting_to_resize)
 	{
-		if (data->resizing > RESIZE_WAIT)
+		if (data->waiting_to_resize > RESIZE_WAIT)
 		{
 			reset_but_preserve_location(data);
 			return (1);
 		}
-		data->resizing++;
+		data->waiting_to_resize++;
 		return (1);
 	}
 	return (0);
@@ -118,5 +121,5 @@ void	resize_hook(int32_t width, int32_t height, void *input)
 	data->new_width = width;
 	data->new_height = height;
 	data->new_px_count = data->new_width * data->new_height;
-	data->resizing = 1;
+	data->waiting_to_resize = 1;
 }

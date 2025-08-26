@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 16:52:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 13:49:30 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/26 14:48:57 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void	update_title(t_data *data)
 
 	string = malloc(1000);
 	mlx_get_mouse_pos(data->mlx, &x, &y);	
-	sprintf(string, "location %.5f, %.5f | scale: %e | iter: %i | wait: %i", 
+	sprintf(string, "location %.5f, %.5f | scale: %e | iter: %i | wait: %i | fps: %.5f", 
 		 data->location.r, data->location.i, data->scale,
-		 data->iteration, data->wait);
+		 data->iteration, data->wait_to_draw, 1 / data->mlx->delta_time);
 	mlx_set_window_title(data->mlx, string);
 	free(string);
 }
@@ -72,5 +72,6 @@ static void	loop_hook(void *input)
 		i++;
 	}
 	colorize_pixels(data);
-	usleep(data->wait);
+	are_we_zooming(data);
+	usleep(data->wait_to_draw);
 }

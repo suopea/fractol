@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 11:07:21 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 21:01:09 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/26 14:48:52 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,3 @@ void	new_location_from_center(t_data *data, int x, int y)
 	update_origins(data);
 }
 
-void	zoom_to_point(t_data *data, int x, int y, float change)
-{
-	if (change < 1)
-	{
-		data->location.r += (data->px[i(x, y, data)].r - data->location.r) * (1 - change);
-		data->location.i += (data->px[i(x, y, data)].i - data->location.i) * (1 - change);
-	}
-	else
-	{
-		data->location.r -= (data->px[i(x, y, data)].r - data->location.r) * (change - 1);
-		data->location.i -= (data->px[i(x, y, data)].i - data->location.i) * (change - 1);
-	}
-	data->scale *= change;
-	update_origins(data);
-}

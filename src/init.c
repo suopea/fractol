@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:06:27 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 13:45:00 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/26 14:56:56 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	initialize_program(t_data *data)
 {
 	data->width = WIDTH;
 	data->height = HEIGHT;
+	data->zoom_count = 0;
+	data->waiting_to_zoom = 0;
 	data->px_count = data->width * data->height;
 	data->work_per_frame = DEFAULT_WORK_PER_FRAME;
-	data->wait = DEFAULT_SPEED;
+	data->wait_to_draw = DEFAULT_SPEED;
 	allocate_everything(data);
 	reset(data);
 	return (1);
@@ -49,7 +51,7 @@ void	allocate_everything(t_data *data)
 void	reset(t_data *data)
 {
 	data->paused = false;
-	data->resizing = 0;
+	data->waiting_to_resize = 0;
 	data->px_count = data->width * data->height;
 	bzero(data->escape_times, data->px_count);
 	data->scale = DEFAULT_SCALE;
