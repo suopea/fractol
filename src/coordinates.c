@@ -24,6 +24,8 @@ void	reset_orbits(t_data *data)
 			data->orbits[i].r = 0;
 			data->orbits[i].i = 0;
 		}
+		else
+			data->orbits[i] = data->px[i];
 		data->escape_times[i] = 0;
 		i++;
 	}
@@ -39,7 +41,7 @@ void	update_locations(t_data *data)
 	if (data->type == mandelbrot)
 		pixel = data->px;
 	else
-		pixel = data->orbits;
+		pixel = data->px;
 	row = 0;
 	while (row < data->height)
 	{
@@ -62,7 +64,7 @@ void	new_location_from_center(t_data *data, int x, int y)
 	if (data->type == mandelbrot)
 		pixel = data->px;
 	else
-		pixel = data->orbits;
+		pixel = data->px;
 	data->location.r += pixel[i(x, y, data)].r - pixel[center(data)].r;
 	data->location.i += pixel[i(x, y, data)].i - pixel[center(data)].i;
 	update_locations(data);
@@ -70,15 +72,21 @@ void	new_location_from_center(t_data *data, int x, int y)
 
 void	zoom_to_point(t_data *data, int x, int y, float change)
 {
+	t_complex	*pixel;
+
+	if (data->type == mandelbrot)
+		pixel = data->px;
+	else
+		pixel = data->orbits;
 	if (change < 1)
 	{
-		data->location.r += (data->px[i(x, y, data)].r - data->location.r) * (1 - change);
-		data->location.i += (data->px[i(x, y, data)].i - data->location.i) * (1 - change);
+		data->location.r += (pixel[i(x, y, data)].r - data->location.r) * (1 - change);
+		data->location.i += (pixel[i(x, y, data)].i - data->location.i) * (1 - change);
 	}
 	else
 	{
-		data->location.r -= (data->px[i(x, y, data)].r - data->location.r) * (change - 1);
-		data->location.i -= (data->px[i(x, y, data)].i - data->location.i) * (change - 1);
+		data->location.r -= (pixel[i(x, y, data)].r - data->location.r) * (change - 1);
+		data->location.i -= (pixel[i(x, y, data)].i - data->location.i) * (change - 1);
 	}
 	data->scale *= change;
 	update_locations(data);
