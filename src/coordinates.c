@@ -47,7 +47,7 @@ void	update_origins(t_data *data)
 	reset_orbits(data);
 }
 
-void	move_center(t_data *data, int x, int y)
+void	new_location_from_center(t_data *data, int x, int y)
 {
 	data->location.r += data->px[i(x, y, data)].r - data->px[center(data)].r;
 	data->location.i += data->px[i(x, y, data)].i - data->px[center(data)].i;

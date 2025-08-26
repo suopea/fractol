@@ -56,7 +56,7 @@ void	reset(t_data *data)
 	data->location.r = 0;
 	data->iteration = 0;
 	update_origins(data);
-	move_center(data, 0, 0);
+	new_location_from_center(data, 0, 0);
 }
 
 int initialize_mlx(t_data *data)

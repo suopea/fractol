@@ -37,6 +37,22 @@ int main(void)
 	return (0);
 }
 
+#include <stdio.h>
+static void	update_title(t_data *data)
+{
+	int32_t x;
+	int32_t y;
+	char	*string;
+
+	string = malloc(1000);
+	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	sprintf(string, "location %.5f, %.5f | scale: %e| iter: %i", 
+		 data->location.r, data->location.i, data->scale,
+		 data->iteration);
+	mlx_set_window_title(data->mlx, string);
+	free(string);
+}
+
 static void	loop_hook(void *input)
 {
 	t_data	*data;
@@ -47,6 +63,7 @@ static void	loop_hook(void *input)
 		return ;
 	if (about_to_resize(data))
 		return ;
+	update_title(data);
 	i = 0;
 	while (i < data->work_per_frame)
 	{
