@@ -85,14 +85,18 @@ static void	loop_hook(void *input)
 	if (about_to_resize(data))
 		return ;
 	update_title(data);
-	i = 0;
-	while (i < data->work_per_frame)
-	{
-		iterate_once(data);
-		i++;
-	}
-	colorize_pixels(data);
 	if (!data->all_black)
+	{
+		i = 0;
+		while (i < data->work_per_frame)
+		{
+			iterate_once(data);
+			i++;
+		}
 		usleep(data->wait);
+	}
+	else
+		iterate_until_first_escape(data);
+	colorize_pixels(data);
 }
 
