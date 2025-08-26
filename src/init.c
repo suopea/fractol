@@ -19,6 +19,7 @@ int	initialize_program(t_data *data)
 	data->height = HEIGHT;
 	data->px_count = data->width * data->height;
 	data->work_per_frame = DEFAULT_WORK_PER_FRAME;
+	data->wait = DEFAULT_SPEED;
 	allocate_everything(data);
 	reset(data);
 	return (1);

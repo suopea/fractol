@@ -65,6 +65,11 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 		reset(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		toggle_pause(data);
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		data->wait += SPEED_CHANGE;
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		if (data->wait - SPEED_CHANGE > 0)
+			data->wait -= SPEED_CHANGE;
 }
 
 static void	reset_but_preserve_location(t_data *data)

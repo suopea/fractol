@@ -38,6 +38,7 @@ int main(void)
 }
 
 #include <stdio.h>
+#include <unistd.h>
 static void	update_title(t_data *data)
 {
 	int32_t x;
@@ -46,9 +47,9 @@ static void	update_title(t_data *data)
 
 	string = malloc(1000);
 	mlx_get_mouse_pos(data->mlx, &x, &y);	
-	sprintf(string, "location %.5f, %.5f | scale: %e| iter: %i", 
+	sprintf(string, "location %.5f, %.5f | scale: %e | iter: %i | wait: %i", 
 		 data->location.r, data->location.i, data->scale,
-		 data->iteration);
+		 data->iteration, data->wait);
 	mlx_set_window_title(data->mlx, string);
 	free(string);
 }
@@ -71,4 +72,5 @@ static void	loop_hook(void *input)
 		i++;
 	}
 	colorize_pixels(data);
+	usleep(data->wait);
 }

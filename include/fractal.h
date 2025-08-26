@@ -20,9 +20,11 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define DEFAULT_SCALE 0.005
+# define DEFAULT_WORK_PER_FRAME 1
+# define DEFAULT_SPEED 50001
+# define SPEED_CHANGE 5000
 # define RESIZE_WAIT 10
 # define SCROLL_AMOUNT 1.15
-# define DEFAULT_WORK_PER_FRAME 1
 # define KEY_ESC MLX_KEY_ESCAPE
 # define KEY_REITERATE MLX_KEY_I
 # define KEY_RESET MLX_KEY_R
@@ -56,6 +58,7 @@ typedef struct s_data
 	int				new_px_count;
 	bool			paused;
 	int				resizing;
+	int			wait;
 }	t_data;
 
 void	update_origins(t_data *data);
