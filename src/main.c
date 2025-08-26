@@ -44,6 +44,7 @@ int	initialize_mandelbrot(t_data *data, int argc, char **argv)
 		mlx_terminate(data->mlx);
 		exit(1);
 	}
+	data->type = mandelbrot;
 	mlx_mouse_hook(data->mlx, mouse_hook, data);
 	mlx_scroll_hook(data->mlx, scroll_hook, data);
 	mlx_resize_hook(data->mlx, resize_hook, data);
@@ -64,6 +65,7 @@ int initialize_julia(t_data *data, int argc, char **argv)
 		mlx_terminate(data->mlx);
 		exit(1);
 	}
+	data->type = julia;
 	data->c.r = strtod(argv[2], NULL);
 	data->c.i = strtod(argv[3], NULL);
 	mlx_mouse_hook(data->mlx, mouse_hook, data);
@@ -108,7 +110,7 @@ static void	loop_mandelbrot(void *input)
 	i = 0;
 	while (i < data->work_per_frame)
 	{
-		iterate_mandelbrot_once(data);
+		iterate_once(data);
 		i++;
 	}
 	colorize_pixels(data);
@@ -126,12 +128,12 @@ static void	loop_julia(void *input)
 	if (about_to_resize(data))
 		return ;
 	update_title(data);
-	while (data->all_black)
-		iterate_until_first_escape(data);
+	// while (data->all_black)
+	// 	iterate_until_first_escape(data);
 	i = 0;
 	while (i < data->work_per_frame)
 	{
-		iterate_mandelbrot_once(data);
+		iterate_once(data);
 		i++;
 	}
 	colorize_pixels(data);

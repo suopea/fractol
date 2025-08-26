@@ -60,21 +60,27 @@ void	reset_mandelbrot(t_data *data)
 	new_location_from_center(data, 0, 0);
 }
 
-static void	change_all_orbits_to(t_data *data)
+static void	locations_become_orbits(t_data *data)
 {
-	int	i;
+	int	row;
+	int	column;
 
-	i = 0;
-	while (i < data->px_count)
+	row = 0;
+	while (row < data->height)
 	{
-		data->orbits[i] = data->c;
-		i++;
+		column = 0;
+		while (column < data->width)
+		{
+			data->orbits[i(column, row, data)].r = data->location.r + row * data->scale;
+			data->orbits[i(column, row, data)].i = data->location.i + column * data->scale;
+			column++;
+		}
+		row++;
 	}
 }
 
 void	reset_julia(t_data *data)
 {
-	change_all_orbits_to(data);
 	data->paused = false;
 	data->resizing = 0;
 	data->px_count = data->width * data->height;
@@ -86,7 +92,7 @@ void	reset_julia(t_data *data)
 	data->all_black = true;
 	update_origins(data);
 	new_location_from_center(data, 0, 0);
-	change_all_orbits_to(data);
+	locations_become_orbits(data);
 }
 
 int initialize_mlx(t_data *data)

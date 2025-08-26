@@ -44,14 +44,16 @@ void	update_origins(t_data *data)
 		}
 		row++;
 	}
-	reset_orbits(data);
+	if (data->type == mandelbrot)
+		reset_orbits(data);
 }
 
 void	new_location_from_center(t_data *data, int x, int y)
 {
 	data->location.r += data->px[i(x, y, data)].r - data->px[center(data)].r;
 	data->location.i += data->px[i(x, y, data)].i - data->px[center(data)].i;
-	update_origins(data);
+	if (data->type == mandelbrot)
+		update_origins(data);
 }
 
 void	zoom_to_point(t_data *data, int x, int y, float change)
@@ -67,6 +69,7 @@ void	zoom_to_point(t_data *data, int x, int y, float change)
 		data->location.i -= (data->px[i(x, y, data)].i - data->location.i) * (change - 1);
 	}
 	data->scale *= change;
-	update_origins(data);
+	if (data->type == mandelbrot)
+		update_origins(data);
 	iterate_until_first_escape(data);
 }

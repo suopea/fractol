@@ -34,6 +34,12 @@
 # include <string.h>
 # include <stdio.h>
 
+typedef enum
+{
+	mandelbrot,
+	julia,
+}	e_fractal;
+
 typedef struct s_complex
 {
 	double	r;
@@ -62,6 +68,7 @@ typedef struct s_data
 	int				resizing;
 	int				wait;
 	bool			all_black;
+	e_fractal		type;
 }	t_data;
 
 void	update_origins(t_data *data);
@@ -79,7 +86,7 @@ void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *
 void	scroll_hook(double xdelta, double ydelta, void *input);
 void	key_hook(mlx_key_data_t keydata, void *input);
 void	resize_hook(int32_t width, int32_t height, void *input);
-void	iterate_mandelbrot_once(t_data *data);
+void	iterate_once(t_data *data);
 void	iterate_julia_once(t_data *data);
 void	iterate_until_first_escape(t_data *data);
 void	colorize_pixels(t_data *data);
