@@ -21,7 +21,8 @@ static	int32_t	normal(int escape_time, int iterations)
 {
 	// return (((iterations / escape_time % 16) * 0x111111) << 8 | 0xFF);
 	// return ((((iterations - escape_time + 100) % 0xFF) * 0x010101) << 8 | 0xFF);
-	return (((((iterations - escape_time + 100) * 20) % 0xFF) * 0x010101) << 8 | 0xFF);
+	return ((((iterations - escape_time + 30) % 0x88) * 0x020202) << 8 | 0xFF);
+	// return (((((iterations - escape_time + 100) * 20) % 0xFF) * 0x010101) << 8 | 0xFF);
 }
 
 void	colorize_pixels(t_data *data)

@@ -59,16 +59,12 @@ void	iterate_until_first_escape(t_data *data)
 {
 	int	i;
 
-	data->all_black = true;
-	while (data->all_black)
+	i = 0;
+	while (i < data->px_count)
 	{
-		i = 0;
-		while (i < data->px_count)
-		{
-			iterate_and_check_escape(&data->px[i], &data->orbits[i], data, i);
-			i++;
-		}
-		printf("%i ", data->iteration);
-		data->iteration++;
+		iterate_and_check_escape(&data->px[i], &data->orbits[i], data, i);
+		i++;
 	}
+	data->iteration++;
+	printf("%i ", data->iteration);
 }

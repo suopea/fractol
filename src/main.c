@@ -65,6 +65,8 @@ static void	loop_hook(void *input)
 	if (about_to_resize(data))
 		return ;
 	update_title(data);
+	while (data->all_black)
+		iterate_until_first_escape(data);
 	i = 0;
 	while (i < data->work_per_frame)
 	{
