@@ -33,13 +33,13 @@ void	update_origins(t_data *data)
 	int	column;
 
 	row = 0;
-	while (row < HEIGHT)
+	while (row < data->height)
 	{
 		column = 0;
-		while (column < WIDTH)
+		while (column < data->width)
 		{
-			data->px[i(column, row)].r = data->location.r + row * data->scale;
-			data->px[i(column, row)].i = data->location.i + column * data->scale;
+			data->px[i(column, row, data)].r = data->location.r + row * data->scale;
+			data->px[i(column, row, data)].i = data->location.i + column * data->scale;
 			column++;
 		}
 		row++;
@@ -47,10 +47,10 @@ void	update_origins(t_data *data)
 	reset_orbits(data);
 }
 
-void	move_center(t_data *data, int x, int y)
+void	new_location_from_center(t_data *data, int x, int y)
 {
-	data->location.r += data->px[i(x, y)].r - data->px[center()].r;
-	data->location.i += data->px[i(x, y)].i - data->px[center()].i;
+	data->location.r += data->px[i(x, y, data)].r - data->px[center(data)].r;
+	data->location.i += data->px[i(x, y, data)].i - data->px[center(data)].i;
 	update_origins(data);
 }
 
@@ -58,13 +58,13 @@ void	zoom_to_point(t_data *data, int x, int y, float change)
 {
 	if (change < 1)
 	{
-		data->location.r += (data->px[i(x, y)].r - data->location.r) * (1 - change);
-		data->location.i += (data->px[i(x, y)].i - data->location.i) * (1 - change);
+		data->location.r += (data->px[i(x, y, data)].r - data->location.r) * (1 - change);
+		data->location.i += (data->px[i(x, y, data)].i - data->location.i) * (1 - change);
 	}
 	else
 	{
-		data->location.r -= (data->px[i(x, y)].r - data->location.r) * (change - 1);
-		data->location.i -= (data->px[i(x, y)].i - data->location.i) * (change - 1);
+		data->location.r -= (data->px[i(x, y, data)].r - data->location.r) * (change - 1);
+		data->location.i -= (data->px[i(x, y, data)].i - data->location.i) * (change - 1);
 	}
 	data->scale *= change;
 	update_origins(data);

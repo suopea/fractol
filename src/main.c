@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "MLX42/MLX42.h"
 #include "fractal.h"
 
 static void	loop_hook(void *input);
@@ -18,7 +19,8 @@ int main(void)
 {
 	t_data	data;
 
-	if (!initialize(&data))
+	// mlx_set_setting(MLX_STRETCH_IMAGE, true);	
+	if (!initialize_program(&data))
 		return (1);
 	if (!initialize_mlx(&data))
 	{
@@ -27,11 +29,28 @@ int main(void)
 	}
 	mlx_mouse_hook(data.mlx, &mouse_hook, &data);
 	mlx_scroll_hook(data.mlx, &scroll_hook, &data);
+	mlx_resize_hook(data.mlx, &resize_hook, &data);
 	mlx_loop_hook(data.mlx, &loop_hook, &data);
 	mlx_key_hook(data.mlx, &key_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (0);
+}
+
+#include <stdio.h>
+static void	update_title(t_data *data)
+{
+	int32_t x;
+	int32_t y;
+	char	*string;
+
+	string = malloc(1000);
+	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	sprintf(string, "location %.5f, %.5f | scale: %e| iter: %i", 
+		 data->location.r, data->location.i, data->scale,
+		 data->iteration);
+	mlx_set_window_title(data->mlx, string);
+	free(string);
 }
 
 static void	loop_hook(void *input)
@@ -40,6 +59,11 @@ static void	loop_hook(void *input)
 	int		i;
 
 	data = input;
+	if (data->paused)
+		return ;
+	if (about_to_resize(data))
+		return ;
+	update_title(data);
 	i = 0;
 	while (i < data->work_per_frame)
 	{

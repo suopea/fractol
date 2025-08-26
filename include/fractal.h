@@ -20,6 +20,7 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define DEFAULT_SCALE 0.005
+# define RESIZE_WAIT 10
 # define SCROLL_AMOUNT 1.15
 # define DEFAULT_WORK_PER_FRAME 10
 # define KEY_ESC MLX_KEY_ESCAPE
@@ -48,25 +49,36 @@ typedef struct s_data
 	t_complex		location;
 	int				work_per_frame;			
 	mlx_t			*mlx;
+	int				width;
+	int				height;
+	int				new_width;
+	int				new_height;
+	int				new_px_count;
+	bool			paused;
+	int				resizing;
 }	t_data;
 
 void	update_origins(t_data *data);
 void	reset_orbits(t_data *data);
-void	move_center(t_data *data, int x, int y);
-int		center(void);
+void	new_location_from_center(t_data *data, int x, int y);
 void	zoom_to_point(t_data *data, int x, int y, float change);
-int		initialize(t_data *data);
+int		initialize_program(t_data *data);
 int		initialize_mlx(t_data *data);
-// void	loop_hook(void *input);
+void	allocate_everything(t_data *data);
+void	reset(t_data *data);
+int		about_to_resize(t_data *data);
 void	clear_screen(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
 void	scroll_hook(double xdelta, double ydelta, void *input);
 void	key_hook(mlx_key_data_t keydata, void *input);
+void	resize_hook(int32_t width, int32_t height, void *input);
 void	iterate_all_pixels_once(t_data *data);
 void	colorize_pixels(t_data *data);
-int		i(int x, int y);
-int		x(int i);
-int		y(int i);
+int		center(t_data *data);
+int		i(int x, int y, t_data *data);
+int		x(int i, t_data *data);
+int		y(int i, t_data *data);
 void	free_everything(t_data *data);
+void	free_and_exit(t_data *data);
 
 #endif

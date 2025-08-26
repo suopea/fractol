@@ -31,11 +31,11 @@ void	colorize_pixels(t_data *data)
 	while (i < data->px_count)
 	{
 		if (!data->escape_times[i])
-			mlx_put_pixel(data->frame, x(i), y(i), 0xFF);
+			mlx_put_pixel(data->frame, x(i, data), y(i, data), 0xFF);
 		else
 		{
 			normalized = normal(data->escape_times[i], data->iteration);
-			mlx_put_pixel(data->frame, x(i), y(i), normalized);
+			mlx_put_pixel(data->frame, x(i, data), y(i, data), normalized);
 		}	
 		i++;
 	}
