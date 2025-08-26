@@ -17,9 +17,11 @@ void	clear_screen(t_data *data)
 	memset(data->frame->pixels, 0, data->px_count * sizeof(int32_t));
 }
 
-static	int32_t	normal(int value, int max)
+static	int32_t	normal(int escape_time, int iterations)
 {
-	return (((max / value % 16) * 0x111111) << 8 | 0xFF);
+	// return (((iterations / escape_time % 16) * 0x111111) << 8 | 0xFF);
+	// return ((((iterations - escape_time + 100) % 0xFF) * 0x010101) << 8 | 0xFF);
+	return ((((iterations - escape_time + 100) % 0xFF * 32) * 0x010101) << 8 | 0xFF);
 }
 
 void	colorize_pixels(t_data *data)
