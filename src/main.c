@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 16:52:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/27 10:54:59 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:06:33 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ static void	loop_hook(void *input)
 			data->to_zoom_soon = 1;
 		}
 	}
+	draw_cursor_cross(data);
 }
 

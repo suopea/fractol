@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/27 15:32:01 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:27:20 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define KEY_ESC MLX_KEY_ESCAPE
 # define KEY_REITERATE MLX_KEY_I
 # define KEY_RESET MLX_KEY_R
+# define BOX_COLOR 0x88888800
+# define CURSOR_COLOR 0x33333300
+# define CURSOR_FADE 10
 
 
 // illegal
@@ -74,6 +77,8 @@ typedef struct s_data
 	bool			all_black;
 	e_fractal		type;
 	bool			cursor_visible;
+	int				mouse_last_position;
+	int				cursor_fading;
 }	t_data;
 
 void	update_locations(t_data *data);
@@ -100,6 +105,7 @@ int		i(int x, int y, t_data *data);
 int		x(int i, t_data *data);
 int		y(int i, t_data *data);
 int32_t	get_pixel_color(uint8_t *pixels, int i);
+void	draw_cursor_cross(t_data *data);
 void	free_everything(t_data *data);
 void	free_and_exit(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);

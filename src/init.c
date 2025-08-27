@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:06:27 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 13:45:00 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 15:51:36 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	initialize_program(t_data *data)
 	data->waiting_to_zoom = 0;
 	data->cursor_visible = false;
 	data->wait = DEFAULT_SPEED;
+	data->mouse_last_position = 0;
 	allocate_everything(data);
 	return (1);
 }
