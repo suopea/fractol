@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 20:48:52 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 12:10:42 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 10:50:57 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	clear_screen(t_data *data)
 // 	// return (((((iterations - escape_time + 100) * 20) % 0xFF) * 0x010101) << 8 | 0xFF);
 // }
 
-void	colorize_pixels(t_data *data)
+void	color_pixels(t_data *data)
 {
 	int	i;
 	int	color;

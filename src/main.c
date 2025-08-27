@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 16:52:50 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/23 13:49:30 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 10:54:59 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ static void	loop_hook(void *input)
 	}
 	else
 		iterate_until_first_escape(data);
-	colorize_pixels(data);
+	color_pixels(data);
 }
 
