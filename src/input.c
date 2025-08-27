@@ -26,20 +26,26 @@ void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *
 		new_location_from_center(data, x, y);
 }
 
-void	scroll_hook(double xdelta, double ydelta, void *input)
+static void	get_cursor_location_and_zoom(t_data *data, float zoom_amount)
 {
-	t_data *data = input;
 	int x;
 	int y;
 
-	(void)xdelta;
-	clear_screen(data);
 	data->all_black = true;
 	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	zoom_to_point(data, x, y, zoom_amount);
+}
+
+void	scroll_hook(double xdelta, double ydelta, void *input)
+{
+	t_data *data = input;
+
+	(void)xdelta;
+	// clear_screen(data);
 	if (ydelta > 0)
-		zoom_to_point(data, x, y, 1.0 / SCROLL_AMOUNT);
+		get_cursor_location_and_zoom(data, 1.0 / SCROLL_AMOUNT);
 	if (ydelta < 0 && data->scale < 10)
-		zoom_to_point(data, x, y, SCROLL_AMOUNT);
+		get_cursor_location_and_zoom(data, SCROLL_AMOUNT);
 }
 
 static void	toggle_pause(t_data *data)
@@ -73,6 +79,8 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 	if (keydata.key == MLX_KEY_RIGHT)
 		if (data->wait - SPEED_CHANGE > 0)
 			data->wait -= SPEED_CHANGE;
+	if (keydata.key == MLX_KEY_Z)
+		get_cursor_location_and_zoom(data, MEGAZOOM);
 }
 
 static void	reset_but_preserve_location(t_data *data)
