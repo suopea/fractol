@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:47:25 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/27 10:52:44 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 15:32:01 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		center(t_data *data);
 int		i(int x, int y, t_data *data);
 int		x(int i, t_data *data);
 int		y(int i, t_data *data);
+int32_t	get_pixel_color(uint8_t *pixels, int i);
 void	free_everything(t_data *data);
 void	free_and_exit(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);

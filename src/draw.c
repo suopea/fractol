@@ -6,11 +6,17 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 20:48:52 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/27 10:50:57 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/27 15:32:04 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
+
+int32_t	get_pixel_color(uint8_t *pixels, int i)
+{
+	pixels += i * 4;
+	return ((pixels[0] << 24) + (pixels[1] << 16) + (pixels[2] << 8) + pixels[3]);
+}
 
 void	clear_screen(t_data *data)
 {
