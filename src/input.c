@@ -47,7 +47,7 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 		}
 		else
 		{
-			data->waiting_to_zoom = ZOOM_WAIT;	
+			data->waiting_to_zoom = 1;	
 		}
 	}
 }
