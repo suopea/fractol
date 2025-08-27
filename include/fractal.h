@@ -24,6 +24,7 @@
 # define DEFAULT_SPEED 50001
 # define SPEED_CHANGE 5000
 # define MEGAZOOM 0.01
+# define ZOOM_WAIT 10
 # define RESIZE_WAIT 10
 # define SCROLL_AMOUNT 1.15
 # define KEY_ESC MLX_KEY_ESCAPE
@@ -57,6 +58,7 @@ typedef struct s_data
 	mlx_image_t		*frame;
 	double			scale;
 	double			to_zoom_soon;
+	int				waiting_to_zoom;
 	int				iteration;
 	t_complex		location;
 	int				work_per_frame;			
@@ -78,6 +80,7 @@ void	reset_orbits(t_data *data);
 void	new_location_from_center(t_data *data, int x, int y);
 void	zoom_to_point(t_data *data, int x, int y, float change);
 void	draw_zoom_box(t_data *data);
+void	get_cursor_location_and_zoom(t_data *data, float zoom_amount);
 int		initialize_program(t_data *data);
 int		initialize_mlx(t_data *data);
 void	allocate_everything(t_data *data);

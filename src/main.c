@@ -98,5 +98,18 @@ static void	loop_hook(void *input)
 	else
 		iterate_until_first_escape(data);
 	color_pixels(data);
+	if (data->waiting_to_zoom)
+	{
+		if (data->waiting_to_zoom < ZOOM_WAIT)
+		{
+			draw_zoom_box(data);
+			data->waiting_to_zoom++;
+		}
+		else
+		{
+			get_cursor_location_and_zoom(data, data->to_zoom_soon);
+			data->to_zoom_soon = 1;
+		}
+	}
 }
 

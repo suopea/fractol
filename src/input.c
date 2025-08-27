@@ -26,26 +26,16 @@ void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *
 		new_location_from_center(data, x, y);
 }
 
-static void	get_cursor_location_and_zoom(t_data *data, float zoom_amount)
-{
-	int x;
-	int y;
-
-	data->all_black = true;
-	mlx_get_mouse_pos(data->mlx, &x, &y);	
-	zoom_to_point(data, x, y, zoom_amount);
-}
-
 void	scroll_hook(double xdelta, double ydelta, void *input)
 {
 	t_data *data = input;
 
 	(void)xdelta;
-	// clear_screen(data);
+	data->waiting_to_zoom = 1;	
 	if (ydelta > 0)
-		get_cursor_location_and_zoom(data, 1.0 / SCROLL_AMOUNT);
+		data->to_zoom_soon *= 1.0 / SCROLL_AMOUNT;
 	if (ydelta < 0 && data->scale < 10)
-		get_cursor_location_and_zoom(data, SCROLL_AMOUNT);
+		data->to_zoom_soon *= SCROLL_AMOUNT;
 }
 
 static void	toggle_pause(t_data *data)

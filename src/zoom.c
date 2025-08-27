@@ -51,3 +51,14 @@ void	draw_zoom_box(t_data *data)
 		i++;
 	}
 }
+
+void	get_cursor_location_and_zoom(t_data *data, float zoom_amount)
+{
+	int x;
+	int y;
+
+	data->all_black = true;
+	data->waiting_to_zoom = 0;
+	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	zoom_to_point(data, x, y, zoom_amount);
+}
