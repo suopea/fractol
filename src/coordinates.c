@@ -59,19 +59,3 @@ void	new_location_from_center(t_data *data, int x, int y)
 	update_locations(data);
 }
 
-void	zoom_to_point(t_data *data, int x, int y, float change)
-{
-	if (change < 1)
-	{
-		data->location.r += (data->px[i(x, y, data)].r - data->location.r) * (1 - change);
-		data->location.i += (data->px[i(x, y, data)].i - data->location.i) * (1 - change);
-	}
-	else
-	{
-		data->location.r -= (data->px[i(x, y, data)].r - data->location.r) * (change - 1);
-		data->location.i -= (data->px[i(x, y, data)].i - data->location.i) * (change - 1);
-	}
-	data->scale *= change;
-	update_locations(data);
-	// iterate_until_first_escape(data);
-}

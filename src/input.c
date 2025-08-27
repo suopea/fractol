@@ -31,11 +31,16 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 	t_data *data = input;
 
 	(void)xdelta;
-	data->waiting_to_zoom = 1;	
 	if (ydelta > 0)
+	{
+		data->waiting_to_zoom = 1;	
 		data->to_zoom_soon *= 1.0 / SCROLL_AMOUNT;
-	if (ydelta < 0 && data->scale < 10)
+	}
+	if (ydelta < 0 && data->scale < DEFAULT_SCALE)
+	{
+		data->waiting_to_zoom = ZOOM_WAIT;	
 		data->to_zoom_soon *= SCROLL_AMOUNT;
+	}
 }
 
 static void	toggle_pause(t_data *data)
