@@ -31,7 +31,6 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 	t_data *data = input;
 
 	(void)xdelta;
-	printf("%.2f\n", ydelta);
 	if (ydelta > 0)
 	{
 		data->waiting_to_zoom = 1;	
