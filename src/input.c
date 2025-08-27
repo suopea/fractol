@@ -55,20 +55,22 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 	t_data	*data;
 
 	data = input;
-	if (keydata.key == KEY_ESC && keydata.action == MLX_PRESS)
+	if (keydata.action != MLX_PRESS)
+		return ;
+	if (keydata.key == KEY_ESC)
 	{
 		free_everything(data);
 		mlx_close_window(data->mlx);
 	}
-	if (keydata.key == KEY_REITERATE && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_REITERATE)
 		reset_orbits(data);
-	if (keydata.key == KEY_RESET && keydata.action == MLX_PRESS)
+	if (keydata.key == KEY_RESET)
 		reset(data);
-	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_SPACE)
 		toggle_pause(data);
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_LEFT)
 		data->wait += SPEED_CHANGE;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_RIGHT)
 		if (data->wait - SPEED_CHANGE > 0)
 			data->wait -= SPEED_CHANGE;
 }
