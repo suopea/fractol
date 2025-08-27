@@ -38,7 +38,10 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 	}
 	if (ydelta < 0 && data->scale < DEFAULT_SCALE)
 	{
-		data->waiting_to_zoom = ZOOM_WAIT;	
+		if (data->waiting_to_zoom == 0)
+			data->waiting_to_zoom = ZOOM_WAIT;	
+		else
+			data->waiting_to_zoom = 1;
 		data->to_zoom_soon *= SCROLL_AMOUNT;
 	}
 }
