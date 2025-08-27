@@ -52,13 +52,13 @@ void	draw_cursor_cross(t_data *data)
 	if (data->cursor_fading && !data->waiting_to_zoom)
 	{
 		i = 0;
-		while (i < data->height)
+		while (i < data->height && mouse_x < data->width)
 		{
 			rotate_pixel(data, mouse_x, i, fade_cursor(CURSOR_COLOR, CURSOR_FADE, data->cursor_fading));
 			i++;
 		}
 		i = 0;
-		while (i < data->width)
+		while (i < data->width && mouse_y < data->height)
 		{
 			rotate_pixel(data, i, mouse_y, fade_cursor(CURSOR_COLOR, CURSOR_FADE, data->cursor_fading));
 			i++;
