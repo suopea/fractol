@@ -31,18 +31,24 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 	t_data *data = input;
 
 	(void)xdelta;
+	printf("%.2f\n", ydelta);
 	if (ydelta > 0)
 	{
 		data->waiting_to_zoom = 1;	
-		data->to_zoom_soon *= 1.0 / SCROLL_AMOUNT;
+		data->to_zoom_soon *= 1.0 / (SCROLL_AMOUNT + (ydelta / 10));
 	}
 	if (ydelta < 0 && data->scale < DEFAULT_SCALE)
 	{
+		data->to_zoom_soon *= (SCROLL_AMOUNT - (ydelta / 50));
 		if (data->waiting_to_zoom == 0)
-			data->waiting_to_zoom = ZOOM_WAIT;	
+		{
+			get_cursor_location_and_zoom(data, data->to_zoom_soon);
+			data->to_zoom_soon = 1;
+		}
 		else
-			data->waiting_to_zoom = 1;
-		data->to_zoom_soon *= SCROLL_AMOUNT;
+		{
+			data->waiting_to_zoom = ZOOM_WAIT;	
+		}
 	}
 }
 
