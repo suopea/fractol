@@ -54,6 +54,20 @@ static void	toggle_pause(t_data *data)
 		data->paused = true;
 }
 
+static void	toggle_cursor(t_data *data)
+{
+	if (data->cursor_visible)
+	{
+		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);	
+		data->cursor_visible = false;
+	}
+	else
+	{
+		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_NORMAL);	
+		data->cursor_visible = true;
+	}
+}
+
 void	key_hook(mlx_key_data_t keydata, void *input)
 {
 	t_data	*data;
@@ -79,6 +93,8 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 			data->wait -= SPEED_CHANGE;
 	if (keydata.key == MLX_KEY_Z)
 		get_cursor_location_and_zoom(data, MEGAZOOM);
+	if (keydata.key == MLX_KEY_C)
+		toggle_cursor(data);
 }
 
 static void	reset_but_preserve_location(t_data *data)

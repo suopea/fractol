@@ -24,7 +24,7 @@
 # define DEFAULT_SPEED 50001
 # define SPEED_CHANGE 5000
 # define MEGAZOOM 0.01
-# define ZOOM_WAIT 10
+# define ZOOM_WAIT 15
 # define RESIZE_WAIT 10
 # define SCROLL_AMOUNT 1.15
 # define KEY_ESC MLX_KEY_ESCAPE
@@ -73,6 +73,7 @@ typedef struct s_data
 	int				wait;
 	bool			all_black;
 	e_fractal		type;
+	bool			cursor_visible;
 }	t_data;
 
 void	update_locations(t_data *data);
