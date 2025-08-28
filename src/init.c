@@ -21,7 +21,6 @@ int	initialize_program(t_data *data)
 	data->work_per_frame = DEFAULT_WORK_PER_FRAME;
 	data->to_zoom_soon = 1;
 	data->waiting_to_zoom = 0;
-	data->cursor_visible = false;
 	data->wait = DEFAULT_SPEED;
 	data->mouse_last_position = 0;
 	allocate_everything(data);
@@ -96,7 +95,6 @@ int	initialize_mlx(t_data *data)
 	if (!data->frame
 		|| mlx_image_to_window(data->mlx, data->frame, 0, 0) < 0)
 		return (0);
-	mlx_set_cursor(data->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR));
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	return (1);
 }
