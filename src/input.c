@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 20:46:46 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/22 21:07:44 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:13:22 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,44 +85,6 @@ void	key_hook(mlx_key_data_t keydata, void *input)
 	if (keydata.key == MLX_KEY_RIGHT)
 		if (data->wait - SPEED_CHANGE > 0)
 			data->wait -= SPEED_CHANGE;
-}
-
-static void	reset_but_preserve_location(t_data *data)
-{
-	t_complex	location_temp;
-	double		scale_temp;	
-
-	location_temp = data->location;
-	scale_temp = data->scale * ((float)data->width / data->new_width);
-	data->width = data->new_width;
-	data->height = data->new_height;
-	data->px_count = data->new_px_count;
-	mlx_delete_image(data->mlx, data->frame);
-	data->frame = mlx_new_image(data->mlx, data->width, data->height);
-	if (!data->frame
-		|| mlx_image_to_window(data->mlx, data->frame, 0, 0) < 0)
-		free_and_exit(data);
-	free_everything(data);
-	allocate_everything(data);
-	reset(data);
-	data->location = location_temp;
-	data->scale = scale_temp;
-	update_locations(data);
-}
-
-int	about_to_resize(t_data *data)
-{
-	if (data->resizing)
-	{
-		if (data->resizing > RESIZE_WAIT)
-		{
-			reset_but_preserve_location(data);
-			return (1);
-		}
-		data->resizing++;
-		return (1);
-	}
-	return (0);
 }
 
 void	resize_hook(int32_t width, int32_t height, void *input)

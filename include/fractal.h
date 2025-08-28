@@ -107,5 +107,6 @@ void	draw_cursor_cross(t_data *data);
 void	free_everything(t_data *data);
 void	free_and_exit(t_data *data);
 void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input);
+void	reset_but_preserve_location(t_data *data);
 
 #endif
