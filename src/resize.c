@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:12:42 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/28 15:13:20 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:16:00 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,3 @@ int	about_to_resize(t_data *data)
 	}
 	return (0);
 }
-
-

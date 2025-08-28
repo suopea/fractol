@@ -6,7 +6,7 @@
 /*   By: ssuopea <ssuopea@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:06:27 by ssuopea           #+#    #+#             */
-/*   Updated: 2025/08/27 15:51:36 by ssuopea          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:18:08 by ssuopea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,6 @@ int	initialize_program(t_data *data)
 	data->mouse_last_position = 0;
 	allocate_everything(data);
 	return (1);
-}
-
-void	free_and_exit(t_data *data)
-{
-	free_everything(data);
-	if (data->frame)
-		mlx_delete_image(data->mlx, data->frame);
-	mlx_close_window(data->mlx);
-}
-
-void	allocate_everything(t_data *data)
-{
-	data->px = malloc(data->px_count * sizeof(t_complex));
-	if (!data->px)
-		free_and_exit(data);
-	data->orbits = malloc(data->px_count * sizeof(t_complex));
-	if (!data->orbits)
-		free_and_exit(data);
-	data->escape_times = calloc(data->px_count, sizeof(int));
-	if (!data->escape_times)
-		free_and_exit(data);
 }
 
 static void	locations_become_orbits(t_data *data)
@@ -97,23 +76,4 @@ int	initialize_mlx(t_data *data)
 		return (0);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	return (1);
-}
-
-void	free_everything(t_data *data)
-{
-	if (data->escape_times)
-	{
-		free(data->escape_times);
-		data->escape_times = NULL;
-	}
-	if (data->orbits)
-	{
-		free(data->orbits);
-		data->orbits = NULL;
-	}
-	if (data->px)
-	{
-		free(data->px);
-		data->px = NULL;
-	}
 }
