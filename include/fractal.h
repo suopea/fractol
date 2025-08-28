@@ -23,7 +23,6 @@
 # define DEFAULT_WORK_PER_FRAME 1
 # define DEFAULT_SPEED 1
 # define SPEED_CHANGE 5000
-# define MEGAZOOM 0.01
 # define ZOOM_WAIT 15
 # define RESIZE_WAIT 10
 # define SCROLL_AMOUNT 1.1
@@ -76,7 +75,6 @@ typedef struct s_data
 	int				wait;
 	bool			all_black;
 	e_fractal		type;
-	bool			cursor_visible;
 	int				mouse_last_position;
 	int				cursor_fading;
 }	t_data;
