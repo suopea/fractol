@@ -16,7 +16,7 @@
 static void	loop_hook(void *input);
 static int	initialize(t_data *data, int argc, char **argv);
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 int	initialize(t_data *data, int argc, char **argv)
 {
 	(void)argc;
-	(void)argv;
 	if (!initialize_program(data))
 		exit(1);
 	if (!initialize_mlx(data))
@@ -61,8 +60,8 @@ int	initialize(t_data *data, int argc, char **argv)
 #include <unistd.h>
 static void	update_title(t_data *data)
 {
-	int32_t x;
-	int32_t y;
+	int32_t	x;
+	int32_t	y;
 	char	*string;
 
 	string = malloc(1000);
@@ -113,4 +112,3 @@ static void	loop_hook(void *input)
 	}
 	draw_cursor_cross(data);
 }
-

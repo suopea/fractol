@@ -25,7 +25,8 @@ static void	iterate_pixel(t_complex *c, t_complex *z, t_data *data, int i)
 		data->escape_times[i] = data->iteration;
 }
 
-static void	iterate_and_check_escape(t_complex *c, t_complex *z, t_data *data, int i)
+static void	iterate_and_check_escape(
+	t_complex *c, t_complex *z, t_data *data, int i)
 {
 	double	i_squared;
 	double	r_squared;
@@ -48,7 +49,7 @@ void	iterate_once(t_data *data)
 	i = 0;
 	while (i < data->px_count)
 	{
-		if (!data->escape_times[i])	
+		if (!data->escape_times[i])
 		{
 			if (data->type == mandelbrot)
 				iterate_pixel(&data->px[i], &data->orbits[i], data, i);

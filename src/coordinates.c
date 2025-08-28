@@ -43,8 +43,10 @@ void	update_locations(t_data *data)
 		column = 0;
 		while (column < data->width)
 		{
-			data->px[i(column, row, data)].r = data->location.r + row * data->scale;
-			data->px[i(column, row, data)].i = data->location.i + column * data->scale;
+			data->px[i(column, row, data)].r
+				= data->location.r + row * data->scale;
+			data->px[i(column, row, data)].i
+				= data->location.i + column * data->scale;
 			column++;
 		}
 		row++;
@@ -58,4 +60,3 @@ void	new_location_from_center(t_data *data, int x, int y)
 	data->location.i += data->px[i(x, y, data)].i - data->px[center(data)].i;
 	update_locations(data);
 }
-

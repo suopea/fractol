@@ -60,8 +60,10 @@ static void	locations_become_orbits(t_data *data)
 		column = 0;
 		while (column < data->width)
 		{
-			data->orbits[i(column, row, data)].r = data->location.r + row * data->scale;
-			data->orbits[i(column, row, data)].i = data->location.i + column * data->scale;
+			data->orbits[i(column, row, data)].r
+				= data->location.r + row * data->scale;
+			data->orbits[i(column, row, data)].i
+				= data->location.i + column * data->scale;
 			column++;
 		}
 		row++;
@@ -85,7 +87,7 @@ void	reset(t_data *data)
 		locations_become_orbits(data);
 }
 
-int initialize_mlx(t_data *data)
+int	initialize_mlx(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!data->mlx)
@@ -95,7 +97,7 @@ int initialize_mlx(t_data *data)
 		|| mlx_image_to_window(data->mlx, data->frame, 0, 0) < 0)
 		return (0);
 	mlx_set_cursor(data->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR));
-	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);	
+	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	return (1);
 }
 

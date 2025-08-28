@@ -13,28 +13,30 @@
 #include "MLX42/MLX42.h"
 #include "fractal.h"
 
-void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *input)
+void	mouse_hook(
+	mouse_key_t button, action_t action, modifier_key_t mods, void *input)
 {
-	t_data *data = input;
-	int	x;
-	int y;
+	t_data	*data;
+	int		x;
+	int		y;
 
 	(void)mods;
+	data = input;
 	clear_screen(data);
-	mlx_get_mouse_pos(data->mlx, &x, &y);	
+	mlx_get_mouse_pos(data->mlx, &x, &y);
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
 		new_location_from_center(data, x, y);
 }
 
 void	scroll_hook(double xdelta, double ydelta, void *input)
 {
-	t_data *data = input;
+	t_data	*data;
 
-	(void)xdelta;
-	printf("%.2f\n", ydelta);
+	(void) xdelta;
+	data = input;
 	if (ydelta > 0)
 	{
-		data->waiting_to_zoom = 1;	
+		data->waiting_to_zoom = 1;
 		data->to_zoom_soon *= 1.0 / (SCROLL_AMOUNT + (ydelta / 10));
 	}
 	if (ydelta < 0 && data->scale < DEFAULT_SCALE)
@@ -47,7 +49,7 @@ void	scroll_hook(double xdelta, double ydelta, void *input)
 		}
 		else
 		{
-			data->waiting_to_zoom = 1;	
+			data->waiting_to_zoom = 1;
 		}
 	}
 }
@@ -64,12 +66,12 @@ static void	toggle_cursor(t_data *data)
 {
 	if (data->cursor_visible)
 	{
-		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);	
+		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 		data->cursor_visible = false;
 	}
 	else
 	{
-		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_NORMAL);	
+		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_NORMAL);
 		data->cursor_visible = true;
 	}
 }
@@ -123,7 +125,7 @@ static void	reset_but_preserve_location(t_data *data)
 	reset(data);
 	data->location = location_temp;
 	data->scale = scale_temp;
-	update_locations(data);	
+	update_locations(data);
 }
 
 int	about_to_resize(t_data *data)

@@ -15,21 +15,16 @@
 int32_t	get_pixel_color(uint8_t *pixels, int i)
 {
 	pixels += i * 4;
-	return ((pixels[0] << 24) + (pixels[1] << 16) + (pixels[2] << 8) + pixels[3]);
+	return ((pixels[0] << 24)
+		+ (pixels[1] << 16)
+		+ (pixels[2] << 8)
+		+ pixels[3]);
 }
 
 void	clear_screen(t_data *data)
 {
 	memset(data->frame->pixels, 0, data->px_count * sizeof(int32_t));
 }
-
-// static	int32_t	normal(int escape_time, int iterations)
-// {
-// 	// return (((iterations / escape_time % 16) * 0x111111) << 8 | 0xFF);
-// 	// return ((((iterations - escape_time + 100) % 0xFF) * 0x010101) << 8 | 0xFF);
-// 	return ((((iterations - escape_time + 30) % 0x88) * 0x020202) << 8 | 0xFF);
-// 	// return (((((iterations - escape_time + 100) * 20) % 0xFF) * 0x010101) << 8 | 0xFF);
-// }
 
 void	color_pixels(t_data *data)
 {
@@ -43,9 +38,10 @@ void	color_pixels(t_data *data)
 			mlx_put_pixel(data->frame, x(i, data), y(i, data), 0xFF);
 		else
 		{
-			color = (((data->iteration - data->escape_times[i] + 30) % 0x88) * 0x020202) << 8 | 0xFF;
+			color = (((data->iteration - data->escape_times[i] + 30) % 0x88)
+					* 0x020202) << 8 | 0xFF;
 			mlx_put_pixel(data->frame, x(i, data), y(i, data), color);
-		}	
+		}
 		i++;
 	}
 }

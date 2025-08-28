@@ -17,11 +17,11 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 4000
+# define HEIGHT 2000
 # define DEFAULT_SCALE 0.005
 # define DEFAULT_WORK_PER_FRAME 1
-# define DEFAULT_SPEED 50001
+# define DEFAULT_SPEED 1
 # define SPEED_CHANGE 5000
 # define MEGAZOOM 0.01
 # define ZOOM_WAIT 15
@@ -31,8 +31,8 @@
 # define KEY_REITERATE MLX_KEY_I
 # define KEY_RESET MLX_KEY_R
 # define BOX_COLOR 0x88888800
-# define CURSOR_COLOR 0x33333300
-# define CURSOR_FADE 10
+# define CURSOR_COLOR 0x55555500
+# define CURSOR_FADE 20
 
 
 // illegal
